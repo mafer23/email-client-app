@@ -1,0 +1,15 @@
+@mixin StylesText($size, $weight, $color){
+    font-family: $mainFont;
+    font-size: $size;
+    font-weight: $weight;
+    color: $color;
+}
+
+@mixin StylesButton($wid, $hei, $bor, $color){
+    width: $wid;
+    height: $hei;
+    background-color: $color;
+    border: none;
+    border-radius: $bor;
+    cursor: pointer;
+}
