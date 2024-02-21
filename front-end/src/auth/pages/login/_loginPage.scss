@@ -1,5 +1,86 @@
 @import "../../../styles/settings";
 
-.loginPage{
+.loginPage {
+    width: 100vw;
+    height: 100vh;
+    background-color: $color1;
+    @include DisplayFlex(
+        center,
+        center,
+        none,
+        none,
+        0
+    );
 
+    &__container {
+        width: 34.563em;
+        height: 29.375em;
+        border-radius: 10px;
+        border: 1px solid $color3;
+        padding: 3em;
+        box-sizing: border-box;
+        @include DisplayFlex(
+            center,
+            center,
+            column,
+            none,
+            2em
+        );
+
+        &__logoTitle {
+            width: 100%;
+            @include DisplayFlex(
+                center,
+                center,
+                column,
+                none,
+                1em
+            );
+
+            img{
+                width: 40%;
+            }
+
+            p {
+                @include StylesText(1em, 300, $color2);
+            }
+        }
+
+        &__inputs {
+            width: 100%;
+            @include DisplayFlex(
+                center,
+                center,
+                column,
+                none,
+                1.5em
+            );
+        }
+
+        &__errorMessage {
+            width: 100%;
+            @include DisplayFlex(
+                center,
+                center,
+                none,
+                none,
+                0
+            );
+            
+            p {
+                @include StylesText(1em, 400, $color5);
+            }
+        }
+
+        button {
+            @include StylesButton(
+                100%,
+                3em,
+                5px,
+                $color4
+            );
+            @include StylesText(1em, 400, $color2);
+        }
+
+    }
 }

@@ -5,9 +5,12 @@ import { Navigate, Route, Routes } from "react-router";
 import { AuthRoutes } from "../auth/routes/AuthRoutes";
 import { DashboardRoutes } from "../dashboard/routes/DashboardRoutes";
 
+//* Importing custom hooks
+import { useAuthStore } from "../hooks/useAuthStore";
+
 export const AppRouter = () => {
 
-  const status: string = 'no-authenticated';
+  const { status } = useAuthStore();
 
   return (
     <Routes>
