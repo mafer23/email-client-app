@@ -29,7 +29,16 @@
         0
         );
         &__logo{
-
+            font-size: 25px;
+            @include DisplayFlex(center,center,none,none,0);
+            font-weight: 600;
+            border:2px solid $color3;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            min-width: 100%;
+            padding-bottom: 4%;
+            padding-top: 4%;
         }
     }
 
