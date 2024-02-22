@@ -1,7 +1,9 @@
 import os
 
 from . import auth
+from . import email
 from flask import Flask
+from smtp.client import SMTPClient
 
 
 def create_app(test_config=None):
@@ -25,10 +27,13 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    smtp_client = SMTPClient('localhost')
+
     # a simple page that says hello
     @app.route('/hello')
     def hello():
         return 'Hello, World!'
 
     app.register_blueprint(auth.bp)
+    app.register_blueprint(email.bp)
     return app
