@@ -1,5 +1,44 @@
 @import "../../styles/settings";
 
 .dashboardPage {
+    font-family: $mainFont,sans-serif;
+    color:$color2;
+    width: 100vw;
+    height: 100vh;
+    background-color: $color1;
+    padding: 0;
+    @include DisplayFlex(
+        center,
+        center,
+        row,
+        none,
+        0
+    );
+    &__leftContainer{
+        /*background-color: $color5;*/
+        border:2px solid $color3;
+        border-right: 0px;
+        min-width: 19%;
+        min-height: 97%;
+        /*Pendiente: ver como reacciona con el resto de cosas*/
+        @include DisplayFlex(
+        center,
+        center,
+        column,
+        none,
+        0
+        );
+        &__logo{
+
+        }
+    }
+
+    &__rightContainer{
+        /*background-color: $color4;*/
+        border:2px solid $color3;
+        min-width: 80%;
+        min-height: 97%;
+    }
+
 
 }
