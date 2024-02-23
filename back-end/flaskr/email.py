@@ -1,16 +1,32 @@
 from flask import Blueprint, flash, g, redirect, render_template, request, url_for
 from werkzeug.exceptions import abort
 
-# from flaskr.auth import login_required
 from flaskr.db import get_db
-from smtp.email import Email
+import smtp
+from smtp.client import SMTPClient
+from smtp.mail import Email
+from smtplib import SMTP as Client
 
 bp = Blueprint("email", __name__, url_prefix="/email")
 
 
 @bp.route("/")
 def index():
-    return "Hola"
+    return "Test"
+
+@bp.route("/get", methods=(["GET"]))
+def get():
+    if request.method == "GET":
+        email = request.args.get('email')
+
+        # Get messages from the mailbox(TODO)
+
+        # Get messages from the db
+
+        
+    return "Get the emails from the db"
+
+
 
 
 @bp.route("/send", methods=(["POST"]))
@@ -32,9 +48,14 @@ def send():
         if error is not None:
             flash(error)
         else: 
-            email = Email(recipient, sender, subject, body) 
-            print(email)
-            return {"msg":"Message sent succesfully"}
+            try:
+                msg = Email(recipient, sender, subject, body).createEmail()  
+            except:
+                return ValueError("Message creation failed!")
+            try: 
+                smtp_client = SMTPClient()
+                smtp_client.sendEmail(msg)
+            except:
+                return ValueError()
              
-
-    return "Message noasdf"
+    return "Message sent successfully!"

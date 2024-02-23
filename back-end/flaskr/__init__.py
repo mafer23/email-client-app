@@ -1,9 +1,12 @@
 import os
 
+import asyncio
 from . import auth
 from . import email
 from flask import Flask
-from smtp.client import SMTPClient
+
+from aiosmtpd.controller import Controller
+from smtp.server import SMTPServer
 
 
 def create_app(test_config=None):
@@ -27,8 +30,6 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    smtp_client = SMTPClient('localhost')
-
     # a simple page that says hello
     @app.route('/hello')
     def hello():
@@ -36,4 +37,7 @@ def create_app(test_config=None):
 
     app.register_blueprint(auth.bp)
     app.register_blueprint(email.bp)
+
+
+
     return app
