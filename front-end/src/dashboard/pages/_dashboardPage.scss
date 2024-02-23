@@ -1,11 +1,15 @@
 @import "../../styles/settings";
+@import "../../styles/stylesGeneral";
 
 .dashboardPage {
+    /*
+    Dashboard is organized in 2 big sections called left and rigth container.
+    Each container is a flex column*/
     font-family: $mainFont,sans-serif;
     color:$color2;
     width: 100vw;
     height: 100vh;
-    background-color: $color1;
+    background-color: $color6;
     padding: 0;
     @include DisplayFlex(
         center,
@@ -16,37 +20,116 @@
     );
     &__leftContainer{
         /*background-color: $color5;*/
-        border:2px solid $color3;
+        border:1px solid $color3;
         border-right: 0px;
+        border-bottom: none;
+        border-top: none;
         min-width: 19%;
-        min-height: 97%;
+        min-height: 99%;
         /*Pendiente: ver como reacciona con el resto de cosas*/
-        @include DisplayFlex(
-        center,
-        center,
-        column,
-        none,
-        0
-        );
-        &__logo{
-            font-size: 25px;
+        @include DisplayFlex(flex-start,flex-start,column,none,0);
+        
+        &__logoBox{
             @include DisplayFlex(center,center,none,none,0);
-            font-weight: 600;
-            border:2px solid $color3;
+            border: 1px solid $color3;
+            position: relative;
             border-top: none;
             border-left: none;
             border-right: none;
-            min-width: 100%;
-            padding-bottom: 4%;
-            padding-top: 4%;
+            height: 76px;
+
+            &__logo{
+                width: 55%;
+                
+            }
         }
+
+        &__createButton{
+            @include StylesButton(90%, 20%, 5px, $color7);
+            font-family: $mainFont,sans-serif;
+            color:$color2;
+            font-size: 0.9em;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            margin: auto;
+            padding: 5%;
+            padding-left: 15%;
+            padding-right: 15%;
+            margin-top: 10%;
+            margin-bottom: 10%;
+        }
+        &__createButton:hover{
+            background-color: $color8;
+        }
+
+        &__inoutButton{
+            @include StylesButton(100%, 20%, 0, $color6);
+            font-family: $mainFont,sans-serif;
+            color:$color2;
+            font-size: 1em;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin: auto;
+            margin-top: 0;
+            margin-bottom: 5%;
+            padding: 5%;
+            padding-left: 10%;
+           
+        }
+        &__inoutButton:hover{
+            background-color: $color7;
+            border-left: 2px solid $color2;
+        }
+        /*Text from inbox and sent*/
+        &__inoutButton:nth-child(3){
+            padding-right: 30%;  
+        }
+        &__inoutButton:nth-child(4){
+            padding-right: 30%;  
+        }
+        &__notLog{
+            background-color: $color4;
+            position: relative;
+            border-radius: 5px;
+            color:$color2;
+            font-size: 1em;
+            width: 30%;
+            max-width: 35%;
+            left:45%;
+
+            
+        }
+        
+        
     }
 
     &__rightContainer{
         /*background-color: $color4;*/
-        border:2px solid $color3;
+        border:1px solid $color3;
         min-width: 80%;
-        min-height: 97%;
+        min-height: 99%;
+        border-bottom: none;
+        border-top: none;
+        border-right: none;
+
+        &__identity {
+            @include DisplayFlex(center,flex-end,row,none,0);
+            width: 97%;
+            height: 50px;
+            padding: auto;
+            
+            padding-right: 3%;
+            height: 76px;
+            border-bottom: 1px solid $color3;
+        }
+        &__identity p {
+            padding-right: 2%;
+        }
+        
     }
 
 
