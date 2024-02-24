@@ -1,5 +1,6 @@
 from flaskr.db import db
 from sqlalchemy.orm import relationship, mapped_column
+from sqlalchemy.sql import func
 from sqlalchemy import Integer, String, ForeignKey, Text, TIMESTAMP
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 
@@ -58,7 +59,7 @@ class Email(db.Model):
     emailId = mapped_column(Integer, primary_key=True, autoincrement=True)
     subject = mapped_column(String(100), nullable=False)
     body = mapped_column(Text)
-    createdAt = mapped_column(TIMESTAMP)
+    createdAt = mapped_column(TIMESTAMP, default=func.current_timestamp())
 
     email_users = relationship('UserEmail', back_populates='email')
 
