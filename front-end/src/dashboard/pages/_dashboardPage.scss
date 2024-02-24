@@ -1,120 +1,92 @@
 @import "../../styles/settings";
 @import "../../styles/stylesGeneral";
 
-body{
-    background-color: $color6;
-}
-
-.dashboard{
-    @include DisplayFlex(center,center,row,none,0);
-    height: 85%;
-    max-width: 90em;
-    
-}
 
 .dashboardPage {
-    font-family: $mainFont,sans-serif;
-    color:$color2;
     width: 100%;
     height: 100vh;
-    max-width: 90em;
-    
-    margin:auto;
+    background-color: $color1;
     @include DisplayFlex(
         center,
         center,
-        column,
+        none,
         none,
         0
     );
-    &__navContainer{
-        @include DisplayFlex(center,space-between,row,none,0);
-        border:1px $color3 solid;
+
+    &__container {
         width: 100%;
-        height: 76px;
-        &__logoBox{
-            @include DisplayFlex(center,center,none,none,0);
-            border-right: 1px solid $color3;
-            position: relative;
-            height: 76px;
-            width: 290px;
-            &__logo{
-                font-size: 25px;
-                font-weight: 500;
+        max-width: 90em;
+        height: 100%;
+        @include DisplayFlex(
+            center,
+            center,
+            none,
+            none,
+            0
+        );
+
+        &__firstSection {
+            width: 20%;
+            height: 100%;
+            border: 1px solid $color3;
+            box-sizing: border-box;
+            @include DisplayFlex(
+                center,
+                flex-start,
+                column,
+                none,
+                0
+            );
+
+            &__logo {
+                width: 100%;
+                height: 4.6em;
+                border-bottom: 1px solid $color3;
+                @include DisplayFlex(
+                    center,
+                    center,
+                    none,
+                    none,
+                    0
+                );
+
+                img {
+                    width: 60%;
+                    object-fit: contain;
+                }
             }
-            padding:0;
-        }
-        &__identity {
-            @include DisplayFlex(center,flex-end,row,none,0);
-            padding-right: 3%;
-        }
-        &__identity p {
-            padding-right: 15%;
         }
 
-    }
+        &__secondSection {
+            width: 80%;
+            height: 100%;
+            border-top: 1px solid $color3;
+            border-bottom: 1px solid $color3;
+            border-right: 1px solid $color3;
+            box-sizing: border-box;
+            @include DisplayFlex(
+                center,
+                flex-start,
+                column,
+                none,
+                0
+            );
 
-    &__menuContainer{
-        border:1px solid $color3;
-        width: 290px;
-        height: 100%;
-        border-top: none;
-        @include DisplayFlex(flex-start,flex-start,column,none,0);
-
-        &__createButton{
-            @include StylesButton(90%, 62px, 5px, $color7);
-            @include StylesText(0.9em,400,$color2);
-            @include DisplayFlex(center,space-between,row,none,0);
-            margin: auto;
-            padding-left: 15%;
-            padding-right: 15%;
-            margin-top: 10%;
-            margin-bottom: 10%;
-        }
-        &__createButton:hover{
-            background-color: $color8;
-            color:$color1;
-            font-weight: bold;
-        }
-
-        &__inoutButton{
-            @include StylesButton(100%, 50px, 0, $color6);
-            @include StylesText(1em,400,$color2);
-            @include DisplayFlex(center,space-between,row,none,0);
-            margin: auto;
-            margin-top: 0;
-            margin-bottom: 5%;
-            padding-left: 10%;
-            padding-right: 3%;
-           
-        }
-        &__inoutButton:hover{
-            background-color: $color7;
-            border-left: 2px solid $color2;
-        }
-
-        &__notLog{
-            background-color: $color4;
-            border-radius: 5px;
-            color:$color2;
-            font-size: 1em;
-            width: 53px;
-            max-width: 60px;
-            
-
-            
+            &__panels {
+                width: 100%;
+                height: 100%;
+                padding: 2em;
+                box-sizing: border-box;
+                @include DisplayFlex(
+                    center,
+                    center,
+                    none,
+                    none,
+                    0
+                );
+            }
         }
     }
-
-    &__emailPanel{
-        border: 1px solid $color3;
-        border-left: none;
-        border-top:none;
-        width: 1153px;
-        height: 100%;
-        max-width: 1153px;
-    }
-
-
 
 }

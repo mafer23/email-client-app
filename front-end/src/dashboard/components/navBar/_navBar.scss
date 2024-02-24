@@ -1,0 +1,110 @@
+@import "../../../styles/settings";
+
+.navBar {
+    width: 100%;
+    padding: 2em 1em 2em 1em;
+    box-sizing: border-box;
+    @include DisplayFlex(
+        center,
+        flex-start,
+        column,
+        none,
+        2em
+    );
+    
+    button {
+        @include StylesButton(
+            100%,
+            3.7em,
+            5px,
+            $color4
+        );
+        @include StylesText(1em, 400, $color2);
+        @include DisplayFlex(
+            center,
+            center,
+            none,
+            none,
+            0.5em
+        );
+
+        img {
+            width: 12%;
+        }
+    }
+
+    &__options {
+        width: 100%;
+        @include DisplayFlex(
+            center,
+            flex-start,
+            column,
+            none,
+            1em
+        );
+
+       button {
+        padding: 0em 0.5em 0em 0.5em;
+        box-sizing: border-box;
+        transition: 0.2s ease-in-out;
+        @include StylesButton(
+            100%,
+            3.5em,
+            0px,
+            transparent
+        );
+        @include DisplayFlex(
+            center,
+            space-between,
+            none,
+            none,
+            0
+        );
+        
+        .titleIcon {
+            @include DisplayFlex(
+                center,
+                flex-start,
+                none,
+                none,
+                1em
+            );
+            
+            h1{
+                @include StylesText(1em, 400, $color2);
+            }
+            
+            div {
+                width: 2em;
+                height: 2em;
+
+                img {
+                    width: 100%;
+                    object-fit: contain;
+                }
+            }
+        }
+
+        .amountOption {
+            width: 4em;
+            height: 1.8em;
+            background-color: $color4;
+            border-radius: 5px;
+            @include DisplayFlex(
+                center,
+                center,
+                none,
+                none,
+                0
+            );
+            @include StylesText(0.9em, 400, $color2);
+        }
+
+        &:hover {
+            background-color: $color7;
+            border-radius: 5px;
+        }
+
+       }
+    }
+}
