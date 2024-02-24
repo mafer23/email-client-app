@@ -1,60 +1,71 @@
 @import "../../styles/settings";
 @import "../../styles/stylesGeneral";
 
+body{
+    background-color: $color6;
+}
+
+.dashboard{
+    @include DisplayFlex(center,center,row,none,0);
+    height: 85%;
+    max-width: 90em;
+    
+}
+
 .dashboardPage {
-    /*
-    Dashboard is organized in 2 big sections called left and rigth container.
-    Each container is a flex column*/
     font-family: $mainFont,sans-serif;
     color:$color2;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
-    background-color: $color6;
-    padding: 0;
+    max-width: 90em;
+    
+    margin:auto;
     @include DisplayFlex(
         center,
         center,
-        row,
+        column,
         none,
         0
     );
-    &__leftContainer{
-        /*background-color: $color5;*/
-        border:1px solid $color3;
-        border-right: 0px;
-        border-bottom: none;
-        border-top: none;
-        min-width: 19%;
-        min-height: 99%;
-        /*Pendiente: ver como reacciona con el resto de cosas*/
-        @include DisplayFlex(flex-start,flex-start,column,none,0);
-        
+    &__navContainer{
+        @include DisplayFlex(center,space-between,row,none,0);
+        border:1px $color3 solid;
+        width: 100%;
+        height: 76px;
         &__logoBox{
             @include DisplayFlex(center,center,none,none,0);
-            border: 1px solid $color3;
+            border-right: 1px solid $color3;
             position: relative;
-            border-top: none;
-            border-left: none;
-            border-right: none;
             height: 76px;
-
+            width: 290px;
             &__logo{
-                width: 55%;
-                
+                font-size: 25px;
+                font-weight: 500;
             }
+            padding:0;
+        }
+        &__identity {
+            @include DisplayFlex(center,flex-end,row,none,0);
+            padding-right: 3%;
+        }
+        &__identity p {
+            padding-right: 15%;
         }
 
+    }
+
+    &__menuContainer{
+        border:1px solid $color3;
+        width: 290px;
+        height: 100%;
+        border-top: none;
+        @include DisplayFlex(flex-start,flex-start,column,none,0);
+
         &__createButton{
-            @include StylesButton(90%, 20%, 5px, $color7);
-            font-family: $mainFont,sans-serif;
-            color:$color2;
-            font-size: 0.9em;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
+            @include StylesButton(90%, 62px, 5px, $color7);
+            @include StylesText(0.9em,400,$color2);
+            @include DisplayFlex(center,space-between,row,none,0);
             margin: auto;
-            padding: 5%;
             padding-left: 15%;
             padding-right: 15%;
             margin-top: 10%;
@@ -62,75 +73,48 @@
         }
         &__createButton:hover{
             background-color: $color8;
+            color:$color1;
+            font-weight: bold;
         }
 
         &__inoutButton{
-            @include StylesButton(100%, 20%, 0, $color6);
-            font-family: $mainFont,sans-serif;
-            color:$color2;
-            font-size: 1em;
-            display: flex;
-            flex-direction: row;
-            align-items: flex-start;
-            justify-content: space-between;
+            @include StylesButton(100%, 50px, 0, $color6);
+            @include StylesText(1em,400,$color2);
+            @include DisplayFlex(center,space-between,row,none,0);
             margin: auto;
             margin-top: 0;
             margin-bottom: 5%;
-            padding: 5%;
             padding-left: 10%;
+            padding-right: 3%;
            
         }
         &__inoutButton:hover{
             background-color: $color7;
             border-left: 2px solid $color2;
         }
-        /*Text from inbox and sent*/
-        &__inoutButton:nth-child(3){
-            padding-right: 30%;  
-        }
-        &__inoutButton:nth-child(4){
-            padding-right: 30%;  
-        }
+
         &__notLog{
             background-color: $color4;
-            position: relative;
             border-radius: 5px;
             color:$color2;
             font-size: 1em;
-            width: 30%;
-            max-width: 35%;
-            left:45%;
+            width: 53px;
+            max-width: 60px;
+            
 
             
         }
-        
-        
     }
 
-    &__rightContainer{
-        /*background-color: $color4;*/
-        border:1px solid $color3;
-        min-width: 80%;
-        min-height: 99%;
-        border-bottom: none;
-        border-top: none;
-        border-right: none;
-
-        &__identity {
-            @include DisplayFlex(center,flex-end,row,none,0);
-            width: 97%;
-            height: 50px;
-            padding: auto;
-            
-            padding-right: 3%;
-            height: 76px;
-            border-bottom: 1px solid $color3;
-        }
-        &__identity p {
-            padding-right: 2%;
-        }
-        
+    &__emailPanel{
+        border: 1px solid $color3;
+        border-left: none;
+        border-top:none;
+        width: 1153px;
+        height: 100%;
+        max-width: 1153px;
     }
+
 
 
 }
