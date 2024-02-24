@@ -10,7 +10,9 @@ import { useAuthStore } from "../hooks/useAuthStore";
 
 export const AppRouter = () => {
 
-  const { status } = useAuthStore();
+  //const { status } = useAuthStore();
+  //temporal
+  const status:string = "authenticated";
 
   return (
     <Routes>
