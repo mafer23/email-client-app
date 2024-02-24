@@ -8,6 +8,7 @@ body{
 .dashboard{
     @include DisplayFlex(center,center,row,none,0);
     height: 85%;
+    width: 100%;
     max-width: 90em;
     
 }
@@ -112,7 +113,7 @@ body{
         border-top:none;
         width: 1153px;
         height: 100%;
-        max-width: 1153px;
+        max-width: 100%;
     }
 
 
