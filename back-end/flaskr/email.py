@@ -1,7 +1,6 @@
 from flask import Blueprint, flash, g, redirect, render_template, request, url_for
 from werkzeug.exceptions import abort
 
-from flaskr.db import get_db
 import smtp
 from smtp.client import SMTPClient
 from smtp.mail import Email
