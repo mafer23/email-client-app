@@ -3,7 +3,7 @@ import os
 import asyncio
 from . import auth
 from . import email
-from flask import Flask
+from flask import Flask, jsonify
 
 from aiosmtpd.controller import Controller
 from smtp.server import SMTPServer
@@ -46,11 +46,12 @@ def create_app(test_config=None):
     # testing the connection with database
     @app.route('/testDB')
     def testDB():
-        relationship_info = UserEmail.get_user_received_emails(2)[0]
-        # print(Email.get_email_by_id(relationship_info['emailId']))
-        print(relationship_info)
+        Email.save_email(recipent=2, sender=1, subject='Testeando desde la app', body='a')
+        relationship_info = Email.get_user_sent_emails(1)
+        
 
-        return 'Not internal problems at least'
+        return jsonify(relationship_info)
+
 
     app.register_blueprint(auth.bp)
     app.register_blueprint(email.bp)
