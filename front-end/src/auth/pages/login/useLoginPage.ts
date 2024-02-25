@@ -1,4 +1,5 @@
 //* Importing custom hooks
+import { useState } from "react";
 import { useAuthStore } from "../../../hooks/useAuthStore";
 import { useForm } from "../../../hooks/useForm";
 
@@ -26,17 +27,30 @@ export const useLoginPage = () => {
     };
 
     const { formState, onInputChange } = useForm( {email: '', password: ''} );
-    const { status } = useAuthStore();
+    const { onHandleLoginUser } = useAuthStore();
+
+    //! Temporal. Se debe quitar
+    const [errorLogin, setErrorLogin] = useState<boolean>(false);
 
     //* Methods
     const onClickLogIn = (): void => {
-        console.log( formState );
+
+      const testCredentials = {
+        email: 'emailTest@gmail.com',
+        password: '123456'
+      };
+      
+      if ( JSON.stringify(formState) !== JSON.stringify(testCredentials) ) return setErrorLogin(true);
+
+      onHandleLoginUser();
+
     }
   
     return {
         //* Attributes
         stylesTextfield,
         formState,
+        errorLogin,
 
         //* Methods
         onInputChange,

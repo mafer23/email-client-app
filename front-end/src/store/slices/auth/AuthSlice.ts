@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { typeAuthSlice } from "../../../types/types"; 
 
 const initialState: typeAuthSlice = {
-    status: 'authenticated', //authenticated, checking, no-authenticated
+    status: 'no-authenticated', //authenticated, checking, no-authenticated
     user: {},
     errorMessage: undefined
 }

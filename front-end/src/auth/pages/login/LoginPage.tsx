@@ -14,7 +14,8 @@ export const LoginPage = () => {
   //* Importing elements
   const { 
     stylesTextfield, 
-    formState, 
+    formState,
+    errorLogin, 
     onInputChange,
     onClickLogIn 
   } = useLoginPage();
@@ -58,7 +59,7 @@ export const LoginPage = () => {
         </div>
 
         <div className="loginPage__container__errorMessage" 
-          style={{ display: "none"}}
+          style={{ display: errorLogin ? '' : 'none' }}
         >
           <p>
             Sorry, we don't recognize the email or password 
