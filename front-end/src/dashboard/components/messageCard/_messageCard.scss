@@ -1,0 +1,78 @@
+@import "../../../styles/settings";
+
+.messageCard {
+    width: 100%;
+    padding: 1em;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: $color7;
+    cursor: pointer;
+    transition: 0.1s ease-in-out;
+    @include DisplayFlex(
+        center,
+        space-between,
+        none,
+        none,
+        0
+    );
+
+    h1 {
+        @include StylesText(0.85em, 400, $color2);
+    }
+
+    h2 {
+        @include StylesText(0.6em, 400, $color2);
+    }
+
+    &__recipient {
+        width: 35%;
+        @include DisplayFlex(
+            center,
+            flex-start,
+            none,
+            none,
+            1em
+        );
+
+        div {
+            width: 4em;
+            height: 2em;
+            border-radius: 5px;
+            background-color: $color5;
+            @include DisplayFlex(
+                center,
+                center,
+                none,
+                none,
+                0
+            );
+            @include StylesText(0.8em, 400, $color2);
+        }
+    }
+
+    &__subject {
+        width: 50%;
+        @include DisplayFlex(
+            center,
+            flex-start,
+            none,
+            none,
+            0
+        );
+    }
+
+    &__date {
+        width: 15%;
+        @include DisplayFlex(
+            center,
+            flex-end,
+            none,
+            none,
+            0
+        );
+    }
+
+    &:hover {
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    }
+}
