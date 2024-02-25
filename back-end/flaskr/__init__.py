@@ -4,15 +4,17 @@ from . import auth
 from . import email
 from flask import Flask, jsonify
 
-from aiosmtpd.controller import Controller
 from smtp.server import SMTPServer
 from flaskr.db import db
-from flaskr.models import User, UserEmail, Email
+from flaskr.models import User
+from flask_cors import CORS
 
 
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
+    # CORS(app)
+    cors = CORS(app, resources={r"/api/*": {"origins": "localhost:5173"}}) 
     app.config.from_mapping(
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
