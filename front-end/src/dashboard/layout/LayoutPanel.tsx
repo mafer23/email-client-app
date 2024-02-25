@@ -8,7 +8,7 @@ import { typeLayoutPanel } from "../../types/types";
 
 export const LayoutPanel = ({ children, title, isOpenMessage = false }: typeLayoutPanel) => {
   return (
-    <div className="layoutPanel">
+    <div className="layoutPanel animate__animated animate__fadeIn">
 
         <div className="layoutPanel__container">
 

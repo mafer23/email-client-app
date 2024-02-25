@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../store/store";
 
 //* Importing actions slices
+import { onLogin } from "../store/slices/auth/AuthSlice";
 
 export const useAuthStore = () => {
 
@@ -11,14 +12,18 @@ export const useAuthStore = () => {
     const dispatch = useDispatch();
 
     //* Methods
+    const onHandleLoginUser = (): void => {
+        dispatch( onLogin({}) );
+    }
 
     return {
         //* Attributes
         status,
         user,
-        errorMessage
+        errorMessage,
 
         //* Methods
+        onHandleLoginUser
     }
 
 }
