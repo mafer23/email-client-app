@@ -36,3 +36,11 @@ export type typeMessageCard = {
     subject: string;
     dateMessage: string;
 }
+
+export type typeMessage = {
+    user: string;
+    email:string;
+    subject: string;
+    dateMessage: string;
+    message:string;
+}
