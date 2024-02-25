@@ -23,7 +23,7 @@ export const LoginPage = () => {
   return (
     <div className="loginPage">
 
-      <div className="loginPage__container">
+      <div className="loginPage__container animate__animated animate__fadeIn">
 
         <div className="loginPage__container__logoTitle">
 

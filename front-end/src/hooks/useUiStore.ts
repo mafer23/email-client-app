@@ -6,13 +6,14 @@ import { RootState } from "../store/store"
 import { 
     onOpenInboxPanel, 
     onOpenMessagePanel, 
-    onOpenSentPanel 
+    onOpenSentPanel, 
+    onSetPreviousPanelStatus
 } from "../store/slices/ui/UiSlice";
 
 export const useUiStore = () => {
 
     //* Attributes
-    const { statePanels } = useSelector((state: RootState) => state.ui);
+    const { statePanels, previousPanelStatus } = useSelector((state: RootState) => state.ui);
     const dispatch = useDispatch();
 
     //* Methods
@@ -28,13 +29,19 @@ export const useUiStore = () => {
         dispatch( onOpenMessagePanel() );
     }
 
+    const onHandleSetPreviousPanelStatus = ( panelStatus: boolean[] ): void => {
+        dispatch( onSetPreviousPanelStatus( panelStatus ) );
+    }
+
     return {
         //* Attributes
         statePanels,
+        previousPanelStatus,
 
         //* Methods
         onHandleOpenInbux,
         onHandleOpenSent,
-        onHandleOpenMessage
+        onHandleOpenMessage,
+        onHandleSetPreviousPanelStatus
     }
 }

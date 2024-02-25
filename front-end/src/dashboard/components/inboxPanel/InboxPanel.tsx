@@ -23,6 +23,7 @@ export const InboxPanel = () => {
                         dateMessage={dateMessage}
                         recipient={recipient}
                         subject={subject}
+                        namePanel="inbox"
                     />
                 ) } 
 

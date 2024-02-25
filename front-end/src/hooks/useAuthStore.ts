@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../store/store";
 
 //* Importing actions slices
-import { onLogin } from "../store/slices/auth/AuthSlice";
+import { onLogin, onLogout } from "../store/slices/auth/AuthSlice";
 
 export const useAuthStore = () => {
 
@@ -16,6 +16,10 @@ export const useAuthStore = () => {
         dispatch( onLogin({}) );
     }
 
+    const onHandleLogoutUser = (): void => {
+        dispatch( onLogout('Ninguno') );
+    }
+
     return {
         //* Attributes
         status,
@@ -23,7 +27,8 @@ export const useAuthStore = () => {
         errorMessage,
 
         //* Methods
-        onHandleLoginUser
+        onHandleLoginUser,
+        onHandleLogoutUser
     }
 
 }
