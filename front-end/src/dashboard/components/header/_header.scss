@@ -7,11 +7,26 @@
     border-bottom: 1px solid $color3;
     @include DisplayFlex(
         center,
-        flex-end,
+        space-between,
         none,
         none,
         0
     );
+
+    button {
+        transition: 0.3s ease-in-out;
+        @include StylesButton(
+            6em,
+            2.5em,
+            5px,
+            transparent
+        );
+        @include StylesText(0.85em, 400, $color2);
+
+        &:hover {
+            background-color: $color7;
+        }
+    }
 
     &__photoUser {
         @include DisplayFlex(

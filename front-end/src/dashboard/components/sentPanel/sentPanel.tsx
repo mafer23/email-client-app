@@ -23,6 +23,7 @@ export const SentPanel = () => {
                         dateMessage={dateMessage}
                         recipient={recipient}
                         subject={subject}
+                        namePanel="sent"
                     />
                 ) } 
 

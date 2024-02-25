@@ -13,6 +13,7 @@ export type typeAuthSlice = {
 
 export type typeUiSlice = {
     statePanels: boolean[];
+    previousPanelStatus: undefined | boolean[];
 }
 
 //* Variables, functions, arrays, etc
@@ -35,6 +36,7 @@ export type typeMessageCard = {
     recipient: string;
     subject: string;
     dateMessage: string;
+    namePanel?: string;
 }
 
 export type typeMessage = {

@@ -3,9 +3,19 @@ import "./_header.scss";
 //* Importing images
 import photoPerfil from "../../../images/Perfil.jpg";
 
+//* Importing custom hook
+import { useHeader } from "./useHeader";
+
 export const Header = () => {
+
+  const { onClickButtonLogout } = useHeader();
+
   return (
     <div className="header">
+
+      <button onClick={ onClickButtonLogout }>
+        Log Out
+      </button>
 
         <div className="header__photoUser">
 
@@ -19,4 +29,5 @@ export const Header = () => {
 
     </div>
   );
+
 }

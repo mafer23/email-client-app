@@ -1,3 +1,4 @@
+//* Importing types
 import { typeMessageCard } from "../../../types/types";
 
 export const useSentPanel = () => {
@@ -16,7 +17,7 @@ export const useSentPanel = () => {
         },
         
     ];
-
+    
     //* Methods
 
     return {
