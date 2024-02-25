@@ -1,0 +1,12 @@
+@import "../../../styles/settings";
+
+.inboxPanel {
+    width: 100%;
+    @include DisplayFlex(
+        center,
+        flex-start,
+        column,
+        none,
+        1em
+    );
+}

@@ -2,17 +2,37 @@
 //* Types and interfaces app
 //*----------------------------------------------------------------
 
-//! Redux
+import { MouseEventHandler, ReactNode } from "react";
+
+//* Redux
 export type typeAuthSlice = {
     status: string;
     user: {};
     errorMessage: string | undefined
 }
 
-//! Variables, functions, arrays, etc
+export type typeUiSlice = {
+    statePanels: boolean[];
+}
+
+//* Variables, functions, arrays, etc
 export type typeButtonsOptions = {
     id: number;
     name: string;
     icon: string;
-    amount: number
+    amount: number;
+    functionClick: MouseEventHandler<HTMLButtonElement>;
+}
+
+//* Components
+export type typeLayoutPanel = {
+    title: string;
+    isOpenMessage: boolean;
+    children: ReactNode;
+}
+
+export type typeMessageCard = {
+    recipient: string;
+    subject: string;
+    dateMessage: string;
 }

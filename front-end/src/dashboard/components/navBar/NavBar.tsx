@@ -21,19 +21,19 @@ export const NavBar = () => {
             <div className="navBar__options">
 
                 {
-                    dataButtonOptions.map(({ icon, id, name, amount }) => 
+                    dataButtonOptions.map(data => 
                     
-                        <button key={ id }>
+                        <button key={ data.id } onClick={ data.functionClick }>
 
                             <div className="titleIcon">
                                 <div>
-                                    <img src={ icon } alt="" />
+                                    <img src={ data.icon } alt="" />
                                 </div>
-                                <h1>{ name }</h1>
+                                <h1>{ data.name }</h1>
                             </div>
 
                             <div className="amountOption">
-                                { amount }
+                                { data.amount }
                             </div>
 
                         </button>

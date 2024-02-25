@@ -1,0 +1,85 @@
+@import "../../styles/settings";
+
+.layoutPanel {
+    width: 100%;
+    height: 100%;
+    padding: 1.5em;
+    box-sizing: border-box;
+    border: 1px solid $color3;
+    background-color: $color6;
+    border-radius: 20px;
+    @include DisplayFlex(
+        center,
+        flex-start,
+        column,
+        none,
+        1em
+    );
+
+    &__container {
+        width: 100%;
+        @include DisplayFlex(
+            center,
+            space-between,
+            none,
+            none,
+            0
+        );
+
+        &__buttonTitle {
+            @include DisplayFlex(
+                center,
+                center,
+                none,
+                none,
+                0.8em
+            );
+
+            button {
+                transition: 0.3s ease-in-out;
+                @include StylesButton(
+                    2em,
+                    2em,
+                    5px,
+                    transparent
+                );
+                @include DisplayFlex(
+                    center,
+                    center,
+                    none,
+                    none,
+                    0
+                );
+
+                img {
+                    width: 100%;
+                    object-fit: contain;
+                }
+
+                &:hover {
+                    background-color: $color7;
+                }
+            }
+
+            div {
+                height: 1.5em;
+                border: 1px solid $color3;
+            }
+
+            h1 {
+                @include StylesText(1.5em, 400, $color2);
+            }
+        }
+
+        &__date {
+            h2 {
+                @include StylesText(0.8em, 400, $color2);
+            }
+        }
+    }
+
+    &__divisor {
+        width: 100%;
+        border: 0.1px solid $color3;
+    }
+}
