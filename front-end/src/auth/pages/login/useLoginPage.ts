@@ -27,22 +27,20 @@ export const useLoginPage = () => {
     };
 
     const { formState, onInputChange } = useForm( {email: '', password: ''} );
-    const { onHandleLoginUser } = useAuthStore();
+    const { onHandleLoginUser, errorMessage } = useAuthStore();
 
     //! Temporal. Se debe quitar
     const [errorLogin, setErrorLogin] = useState<boolean>(false);
 
     //* Methods
-    const onClickLogIn = (): void => {
+    const onClickLogIn = async(): Promise<void> => {
 
-      const testCredentials = {
-        email: 'emailTest@gmail.com',
-        password: '123456'
-      };
-      
-      if ( JSON.stringify(formState) !== JSON.stringify(testCredentials) ) return setErrorLogin(true);
+      await onHandleLoginUser({
+        email: formState.email,
+        password: formState.password
+      });
 
-      onHandleLoginUser();
+      if(!errorMessage) return setErrorLogin(true);
 
     }
   

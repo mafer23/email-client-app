@@ -5,10 +5,18 @@
 import { MouseEventHandler, ReactNode } from "react";
 
 //* Redux
+export type typeDataUser = {
+    userId: number;
+    userName: string;
+    firstName: string;
+    lasttName: string;
+    password: string;
+}
+
 export type typeAuthSlice = {
     status: string;
-    user: {};
-    errorMessage: string | undefined
+    user: typeDataUser;
+    errorMessage: string | undefined;
 }
 
 export type typeUiSlice = {
@@ -23,6 +31,11 @@ export type typeButtonsOptions = {
     icon: string;
     amount: number;
     functionClick: MouseEventHandler<HTMLButtonElement>;
+}
+
+export type typeLoginUser = {
+    email: string;
+    password: string;
 }
 
 //* Components

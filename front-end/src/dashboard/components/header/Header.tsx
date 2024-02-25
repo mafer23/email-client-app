@@ -8,7 +8,7 @@ import { useHeader } from "./useHeader";
 
 export const Header = () => {
 
-  const { onClickButtonLogout } = useHeader();
+  const { onClickButtonLogout, user } = useHeader();
 
   return (
     <div className="header">
@@ -19,7 +19,7 @@ export const Header = () => {
 
         <div className="header__photoUser">
 
-            <h2>Mateo Olaya</h2>
+            <h2>{ `${ user.firstName } ${ user.lasttName }` }</h2>
 
             <div className="header__photoUser__image">
                 <img src={ photoPerfil } alt="" />

@@ -4,7 +4,7 @@ import { useAuthStore } from "../../../hooks/useAuthStore"
 export const useHeader = () => {
   
     //* Attributes
-    const { onHandleLogoutUser } = useAuthStore();
+    const { onHandleLogoutUser, user } = useAuthStore();
 
     //* Methods
     const onClickButtonLogout = (): void => {
@@ -13,6 +13,7 @@ export const useHeader = () => {
 
     return {
         //* Attributes
+        user,
 
         //* Methods
         onClickButtonLogout
