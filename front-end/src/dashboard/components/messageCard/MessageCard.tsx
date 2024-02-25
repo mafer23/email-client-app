@@ -8,7 +8,7 @@ import { useMessageCard } from "./useMessageCard";
 
 export const MessageCard = ({ recipient, subject, dateMessage, namePanel }: typeMessageCard) => {
 
-    const { onClickCard } = useMessageCard( namePanel );
+    const { onClickCard } = useMessageCard( namePanel! );
 
     return (
         <div className="messageCard" onClick={ onClickCard }>
