@@ -1,6 +1,5 @@
 import os
 
-import asyncio
 from . import auth
 from . import email
 from flask import Flask, jsonify
@@ -17,7 +16,7 @@ def create_app(test_config=None):
     app.config.from_mapping(
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
-        SQLALCHEMY_DATABASE_URI='postgresql://postgres:abc123@localhost/test'
+        SQLALCHEMY_DATABASE_URI='postgresql://postgres:password@localhost/test'
     )
 
     if test_config is None:
@@ -37,18 +36,12 @@ def create_app(test_config=None):
         os.makedirs(app.instance_path)
     except OSError:
         pass
-
-    # a simple page that says hello
-    @app.route('/hello')
-    def hello():
-        return 'Hello, World!'
     
     # testing the connection with database
     @app.route('/testDB')
     def testDB():
-        Email.save_email(recipent=2, sender=1, subject='Testeando desde la app', body='a')
-        relationship_info = Email.get_user_sent_emails(1)
-        
+        print(User.save_user('test3', 'test3', 'testing3', '123456'))
+        relationship_info = User.get_user_by_userId(3)        
 
         return jsonify(relationship_info)
 

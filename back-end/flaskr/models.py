@@ -29,7 +29,23 @@ class User(db.Model):
         user = db.session.execute(statement).scalars()
         user_schema = UserSchema()
         return user_schema.get_users(user)
-    
+
+    @classmethod
+    def get_user_by_userId(cls, userId):
+        statement = db.select(cls).filter_by(userId=userId)
+        user = db.session.execute(statement).scalars()
+        user_schema = UserSchema()
+        return user_schema.get_users(user)
+
+    @classmethod
+    def save_user(cls, userName, firstName, lasttName, password):
+        new_user = cls(userName=userName, firstName=firstName, lasttName=lasttName, password=password)
+        try:
+            db.session.add(new_user)
+            db.session.commit()
+        except:
+            db.session.close()
+            return ValueError("Something went wrong with db") 
 
 # Class that represents the n to n relationship betwen sender, receipt and email.
 class UserEmail(db.Model):
