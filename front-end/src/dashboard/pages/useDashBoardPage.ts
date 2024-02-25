@@ -5,7 +5,7 @@ export const useDashBoardPage = () => {
 
     //* Attributes
     const { statePanels } = useUiStore();
-
+    
     //* Methods
 
     return {

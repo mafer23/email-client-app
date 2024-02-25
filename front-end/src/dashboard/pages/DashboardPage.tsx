@@ -10,6 +10,8 @@ import iconLogo from "../../images/Logo.png";
 
 //* Importing custom hook
 import { useDashBoardPage } from "./useDashBoardPage";
+import { SentPanel } from "../components/sentPanel/sentPanel";
+import { ViewPanel } from "../components/viewPanel/viewPanel";
 
 export const DashboardPage = () => {
 
@@ -35,7 +37,10 @@ export const DashboardPage = () => {
           <Header/>
 
           <div className="dashboardPage__container__secondSection__panels">
-            { statePanels[0] && <InboxPanel/> }
+            { statePanels[0] && <InboxPanel/> 
+            }
+            {statePanels[1] && <ViewPanel/>}
+            {statePanels[2] && <ViewPanel/>}
           </div>
 
         </div>

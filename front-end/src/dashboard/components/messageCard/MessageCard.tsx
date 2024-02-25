@@ -3,7 +3,9 @@ import "./_messageCard.scss";
 //* Importing types
 import { typeMessageCard } from "../../../types/types";
 
+
 export const MessageCard = ({ recipient, subject, dateMessage }: typeMessageCard) => {
+
   return (
     <div className="messageCard">
         

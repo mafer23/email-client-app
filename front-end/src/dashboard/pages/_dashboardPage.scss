@@ -1,6 +1,9 @@
 @import "../../styles/settings";
 @import "../../styles/stylesGeneral";
 
+body{
+    background-color: $color1; 
+}
 
 .dashboardPage {
     width: 100%;
