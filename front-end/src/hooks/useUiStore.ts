@@ -4,7 +4,9 @@ import { RootState } from "../store/store"
 
 //* Importing actions
 import { 
+    onCloseMessageModal,
     onOpenInboxPanel, 
+    onOpenMessageModal, 
     onOpenMessagePanel, 
     onOpenSentPanel, 
     onSetPreviousPanelStatus
@@ -13,7 +15,7 @@ import {
 export const useUiStore = () => {
 
     //* Attributes
-    const { statePanels, previousPanelStatus } = useSelector((state: RootState) => state.ui);
+    const { statePanels, previousPanelStatus, messageModal } = useSelector((state: RootState) => state.ui);
     const dispatch = useDispatch();
 
     //* Methods
@@ -33,15 +35,26 @@ export const useUiStore = () => {
         dispatch( onSetPreviousPanelStatus( panelStatus ) );
     }
 
+    const onHandleOpenMessageModal = (): void => {
+        dispatch( onOpenMessageModal() );
+    }
+
+    const onHandleCloseMessageModal = (): void => {
+        dispatch( onCloseMessageModal() );
+    }
+
     return {
         //* Attributes
         statePanels,
         previousPanelStatus,
+        messageModal,
 
         //* Methods
         onHandleOpenInbux,
         onHandleOpenSent,
         onHandleOpenMessage,
-        onHandleSetPreviousPanelStatus
+        onHandleSetPreviousPanelStatus,
+        onHandleOpenMessageModal,
+        onHandleCloseMessageModal
     }
 }

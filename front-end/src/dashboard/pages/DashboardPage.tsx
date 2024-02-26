@@ -6,6 +6,7 @@ import { NavBar } from "../components/navBar/NavBar";
 import { InboxPanel } from "../components/inboxPanel/InboxPanel";
 import { SentPanel } from "../components/sentPanel/sentPanel";
 import { ViewPanel } from "../components/viewPanel/viewPanel";
+import { MessageModal } from "../components/modal/MessageModal";
 
 //* Importing images
 import iconLogo from "../../images/Logo.png";
@@ -15,7 +16,7 @@ import { useDashBoardPage } from "./useDashBoardPage";
 
 export const DashboardPage = () => {
 
-  const { statePanels } = useDashBoardPage();
+  const { statePanels, messageModal } = useDashBoardPage();
 
   return (
     <div className="dashboardPage animate__animated animate__fadeIn">
@@ -37,9 +38,10 @@ export const DashboardPage = () => {
           <Header/>
 
           <div className="dashboardPage__container__secondSection__panels">
+            { messageModal && <MessageModal/> }
             { statePanels[0] && <InboxPanel/> }
-            { statePanels[1] && <SentPanel/> }
-            { statePanels[2] && <ViewPanel/> }
+            { statePanels[1] && <SentPanel/>  }
+            { statePanels[2] && <ViewPanel/>  }
           </div>
 
         </div>
