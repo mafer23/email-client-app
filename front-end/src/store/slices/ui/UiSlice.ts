@@ -8,7 +8,8 @@ const initialState: typeUiSlice = {
     //* Second boolean is for sent panel
     //* Third boolean is for message panel
     statePanels: [true, false, false],
-    previousPanelStatus: undefined
+    previousPanelStatus: undefined,
+    messageModal: false
 }
 
 export const uiSlice = createSlice({
@@ -32,6 +33,12 @@ export const uiSlice = createSlice({
         },
         onSetPreviousPanelStatus: (state, { payload }) => {
             state.previousPanelStatus = payload;
+        },
+        onOpenMessageModal: (state) => {
+            state.messageModal = true;
+        },
+        onCloseMessageModal: (state) => {
+            state.messageModal = false;
         }
     }
 });
@@ -40,5 +47,7 @@ export const {
     onOpenInboxPanel,
     onOpenSentPanel,
     onOpenMessagePanel,
-    onSetPreviousPanelStatus
+    onSetPreviousPanelStatus,
+    onOpenMessageModal,
+    onCloseMessageModal
  } = uiSlice.actions;

@@ -15,13 +15,22 @@ export type typeDataUser = {
 
 export type typeAuthSlice = {
     status: string;
-    user: typeDataUser;
+    user: typeDataUser | {};
     errorMessage: string | undefined;
 }
 
 export type typeUiSlice = {
     statePanels: boolean[];
     previousPanelStatus: undefined | boolean[];
+    messageModal: boolean;
+}
+
+export type typeEmailSlice = {
+    emailsReceived: [];
+    emailSent: [];
+    selectedEmail: undefined | {};
+    emailsUsers: [];
+    isLoading: boolean;
 }
 
 //* Variables, functions, arrays, etc

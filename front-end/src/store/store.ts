@@ -3,11 +3,13 @@ import { configureStore } from "@reduxjs/toolkit";
 //* Importing slices
 import { authSlice } from "./slices/auth/AuthSlice";
 import { uiSlice } from "./slices/ui/UiSlice";
+import { emailSlice } from "./slices/email/EmailSlice";
 
 export const store = configureStore({
     reducer: {
         auth: authSlice.reducer,
-        ui: uiSlice.reducer
+        ui: uiSlice.reducer,
+        email: emailSlice.reducer
     }
 });
 

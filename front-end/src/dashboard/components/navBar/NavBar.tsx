@@ -8,12 +8,12 @@ import { useNavBar } from "./useNavBar";
 
 export const NavBar = () => {
 
-    const { dataButtonOptions } = useNavBar();
+    const { dataButtonOptions, onHandleOpenMessageModal } = useNavBar();
 
     return (
         <div className="navBar">
 
-            <button>
+            <button onClick={ onHandleOpenMessageModal }>
                 <img src={ iconAdd } alt="" />
                 New Message
             </button>

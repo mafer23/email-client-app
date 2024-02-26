@@ -13,7 +13,8 @@ export const useNavBar = () => {
     //* Attributes
     const { 
         onHandleOpenInbux,
-        onHandleOpenSent 
+        onHandleOpenSent,
+        onHandleOpenMessageModal 
     } = useUiStore();
 
     const dataButtonOptions: typeButtonsOptions[] = [
@@ -40,6 +41,7 @@ export const useNavBar = () => {
         dataButtonOptions,
 
         //* Methods
+        onHandleOpenMessageModal,
 
     }
 

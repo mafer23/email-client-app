@@ -1,0 +1,114 @@
+@import "../../../styles/settings";
+
+.messageModal {
+    position: absolute;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(1px);
+    @include DisplayFlex(
+        center,
+        center,
+        none,
+        none,
+        0
+    );
+
+    &__container {
+        width: 42.75em;
+        height: 75%;
+        background-color: $color7;
+        border-radius: 10px;
+        padding: 1.5em;
+        box-sizing: border-box;
+        @include DisplayFlex(
+            flex-start,
+            center,
+            column,
+            none,
+            1em
+        );
+
+        h1 {
+            @include StylesText(1em, 500, $color2);
+        }
+
+        hr {
+            width: 100%;
+            border: 1px solid $color3;
+        }
+
+        &__inputs {
+            width: 100%;
+            @include DisplayFlex(
+                center,
+                center,
+                column,
+                none,
+                1em
+            );
+
+            input {
+                width: 100%;
+                height: 2.5em;
+                background-color: transparent;
+                border-radius: 10px;
+                border: none;
+                outline: none;
+                @include StylesText(0.85em, 400, $color2);
+            }
+        }
+
+        &__content {
+            width: 100%;
+            height: 65%;
+            border-radius: 10px;
+            border: 1px solid $color3;
+            @include DisplayFlex(
+                center,
+                center,
+                none,
+                none,
+                0
+            );
+
+            textarea {
+                width: 95%;
+                height: 90%;
+                background-color: transparent;
+                resize: none;
+                border: none;
+                outline: none;
+                @include StylesText(0.8em, 400, $color2);
+            }
+        }
+
+        &__buttons {
+            width: 100%;
+            @include DisplayFlex(
+                center,
+                flex-start,
+                none,
+                none,
+                0.5em
+            );
+
+            button {
+                @include StylesButton(
+                    7em,
+                    2.5em,
+                    5px,
+                    $color4
+                );
+                @include StylesText(0.9em, 400, $color2);
+            }
+
+            .buttonCancel {
+                background-color: transparent;
+                border: 2px solid $color4;
+            }
+        }
+        
+    }
+}
