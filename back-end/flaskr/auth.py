@@ -11,7 +11,7 @@ bp = Blueprint("auth", __name__, url_prefix="/auth")
 def register():
     data = request.json
     if not data:
-        return "No data was sent"
+        return (jsonify({"status": "fail", "data": "No data was sent"}),)
     username = data["username"]
     firstname = data["firstname"]
     lastname = data["lastname"]
@@ -28,48 +28,80 @@ def register():
     elif not password:
         error = "Password is required."
 
-    if error is None:
+    if error is not None:
+        return jsonify({"status": "fail", "data": error}), 400
+    else:
         try:
             exist = User.get_user_by_userName(username)
         except:
-            return ValueError("Couldn't connect to the db")
+            return (
+                jsonify({"status": "error", "data": "Couldn't connect to the db"}),
+                500,
+            )
         if exist:
-            return ValueError(f"Username {username} already registered")
+            return (
+                jsonify(
+                    {
+                        "status": "fail",
+                        "data": f"Username {username} already registered",
+                    }
+                ),
+                400,
+            )
         else:
             hashed_password = Password.create_hashed_password(password)
             try:
                 User.save_user(username, firstname, lastname, hashed_password)
-            except ValueError:
-                return ValueError
-    else:
-        return error
+            except:
+                return (
+                    jsonify(
+                        {
+                            "status": "error",
+                            "data": "An error has occurred saving the user",
+                        }
+                    ),
+                    500,
+                )
 
-    return "You registered succesfully", 202
+    return jsonify({"status": "success", "data": "You registered successfully"}), 201
 
 
 @bp.route("/login", methods=(["POST"]))
 def login():
     data = request.json
     if not data:
-        return "No data was sent"
+        return jsonify({"status": "fail", "data": "No data was sent"}), 400
     username = data["username"]
     password = data["password"]
     error = None
 
-    if error is None:
+    if not username:
+        error = "username was not provided"
+    elif not password:
+        error = "password was not provided"
+
+    if error is not None:
+        return jsonify({"status": "fail", "data": error}), 400
+    else:
         try:
             user = User.get_user_by_userName(username)
         except:
-            return "Couldn't connect to the db"
+            return (
+                jsonify({"status": "error", "data": "Couldn't connect to the db"}),
+                500,
+            )
         if not user:
-            return f"Username {username} is not registered"
-        else: 
+            return (
+                jsonify(
+                    {"status": "fail", "data": f"Username {username} is not registered"}
+                ),
+                400,
+            )
+        else:
             db_password = user[0]["password"]
             is_match = Password.compare_passwords(password, db_password)
             if is_match:
                 del user[0]["password"]
-                return jsonify(user)
+                return jsonify({"status": "success", "data": user[0]}), 200
             else:
-                return "Wrong password"
-
-    return "You are successfully logged in"
+                return jsonify({"status": "fail", "data": "Wrong password"}), 400
