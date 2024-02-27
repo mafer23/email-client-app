@@ -1,7 +1,8 @@
 from flaskr.db import db
-from sqlalchemy.orm import relationship, mapped_column
+from sqlalchemy.orm import relationship, mapped_column, aliased
 from sqlalchemy.sql import func
-from sqlalchemy import Integer, String, ForeignKey, Text, TIMESTAMP
+from sqlalchemy import Integer, String, ForeignKey, Text
+from sqlalchemy.dialects.postgresql import TIMESTAMP
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 
 # Class that represents the "User" table in the database
@@ -52,7 +53,7 @@ class User(db.Model):
             db.session.commit()
         except:
             db.session.close()
-            return ValueError("Something went wrong with db") 
+            return ValueError("Something went wrong with db")
 
 # Class that represents the n to n relationship betwen sender, receipt and email.
 class UserEmail(db.Model):
@@ -82,7 +83,7 @@ class Email(db.Model):
     emailId = mapped_column(Integer, primary_key=True, autoincrement=True)
     subject = mapped_column(String(100), nullable=False)
     body = mapped_column(Text)
-    createdAt = mapped_column(TIMESTAMP, default=func.current_timestamp())
+    createdAt = mapped_column(TIMESTAMP(precision=0), default=func.current_timestamp())
 
     email_users = relationship('UserEmail', back_populates='email')
 
@@ -95,17 +96,35 @@ class Email(db.Model):
     
     @classmethod
     def get_user_received_emails(cls, userId):
-        statement = db.select(cls).join(UserEmail, cls.emailId == UserEmail.emailId).where(UserEmail.recipentId == userId)
-        emails = db.session.execute(statement).scalars()
         email_schema = EmailSchema()
-        return email_schema.get_emails(emails)
+        user_schema = UserSchema()
+        statement = db.select(cls, User).join(UserEmail, cls.emailId == UserEmail.emailId).join(User, UserEmail.senderId == User.userId).where(UserEmail.recipentId == userId)
+        results = db.session.execute(statement)
+        serialized_info = []
+        for row in results:
+            email = email_schema.get_email(row.Email)
+            sender = user_schema.get_user(row.User)
+            serialized_info.append({
+                "email": email,
+                "sender": sender 
+            })
+        return serialized_info
     
     @classmethod
     def get_user_sent_emails(cls, userId):
-        statement = db.select(cls).join(UserEmail, cls.emailId == UserEmail.emailId).where(UserEmail.senderId == userId)
-        emails = db.session.execute(statement).scalars()
         email_schema = EmailSchema()
-        return email_schema.get_emails(emails)
+        user_schema = UserSchema()
+        statement = db.select(cls, User).join(UserEmail, cls.emailId == UserEmail.emailId).join(User, UserEmail.recipentId == User.userId).where(UserEmail.senderId == userId)
+        results = db.session.execute(statement)
+        serialized_info = []
+        for row in results:
+            email = email_schema.get_email(row.Email)
+            sender = user_schema.get_user(row.User)
+            serialized_info.append({
+                "email": email,
+                "sender": sender 
+            })
+        return serialized_info
     
     @classmethod
     def get_all(cls):
@@ -119,8 +138,14 @@ class Email(db.Model):
         email = cls(subject=subject, body=body)
         email_users = UserEmail(recipentId=recipent, senderId=sender)
         email.email_users.append(email_users)
-        db.session.add(email)
-        db.session.commit()
+        email_schema = EmailSchema()
+        try:
+            db.session.add(email)
+            db.session.commit()
+            return email_schema.get_emails([email])
+        except:
+            db.session.close()
+            raise SystemError('Something went wrong with db')
 
 
 """
@@ -140,6 +165,9 @@ class UserSchema(SQLAlchemyAutoSchema):
     # Returns an array with formated information
     def get_users(self, users):
         return [self.dump(user) for user in users]
+    
+    def get_user(self, user):
+        return self.dump(user)
     
 
 class UserEmailSchema(SQLAlchemyAutoSchema):
@@ -161,3 +189,6 @@ class EmailSchema(SQLAlchemyAutoSchema):
     # Returns an array with formated information
     def get_emails(self, emails):
         return [self.dump(email) for email in emails]
+    
+    def get_email(self, email):
+        return self.dump(email)
