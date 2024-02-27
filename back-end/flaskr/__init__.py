@@ -18,7 +18,7 @@ def create_app(test_config=None):
     app.config.from_mapping(
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
-        SQLALCHEMY_DATABASE_URI='postgresql://postgres:1234@localhost/test'
+        SQLALCHEMY_DATABASE_URI='postgresql://postgres:abc123@localhost/test'
     )
 
     if test_config is None:
@@ -42,9 +42,9 @@ def create_app(test_config=None):
     # testing the connection with database
     @app.route('/testDB')
     def testDB():
-        print(User.save_user('test3', 'test3', 'testing3', '123456'))
-        relationship_info = User.get_user_by_userId(3)        
-
+        # for i in range(0, 4):
+        #     User.save_user(f'test{i}', 'test{i}', 'testing{i}', '{i}')
+        relationship_info = User.get_all_emails_and_ids()    
         return jsonify(relationship_info)
 
 

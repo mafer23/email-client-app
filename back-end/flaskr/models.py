@@ -10,9 +10,9 @@ class User(db.Model):
 
     # Columns declaration
     userId = mapped_column(Integer, primary_key=True, autoincrement=True)
-    userName = mapped_column(String(20), unique=True, nullable=False)
+    userName = mapped_column(String(45), unique=True, nullable=False)
     firstName = mapped_column(String(32), nullable=False)
-    lasttName = mapped_column(String(32))
+    lastName = mapped_column(String(32))
     password = mapped_column(String(255), nullable=False)
 
     # Retreives all 
@@ -36,10 +36,17 @@ class User(db.Model):
         user = db.session.execute(statement).scalars()
         user_schema = UserSchema()
         return user_schema.get_users(user)
+    
+    @classmethod
+    def get_all_emails_and_ids(cls):
+        statement = db.select(cls.userName, cls.userId)
+        users = db.session.execute(statement)
+        user_schema = UserSchema()
+        return user_schema.get_users(users)
 
     @classmethod
-    def save_user(cls, userName, firstName, lasttName, password):
-        new_user = cls(userName=userName, firstName=firstName, lasttName=lasttName, password=password)
+    def save_user(cls, userName, firstName, lastName, password):
+        new_user = cls(userName=userName, firstName=firstName, lastName=lastName, password=password)
         try:
             db.session.add(new_user)
             db.session.commit()
