@@ -6,7 +6,7 @@ from flask import (
 )
 from werkzeug.exceptions import abort
 
-from .models import Email as EmailModel, User
+from .models import Email as EmailModel
 from .models import User as UserModel
 from smtp.mail import Email
 from smtp.client import SMTPClient
@@ -14,10 +14,32 @@ from smtp.client import SMTPClient
 bp = Blueprint("email", __name__, url_prefix="/email")
 
 
-@bp.route("/users", methods=(["GET"]))
-def get():
+@bp.route("/user", methods=(["GET"]))
+def get_emails_user():
+    user_id = request.args.get("user_id")
+    if not user_id:
+        return jsonify({"status": "fail", "data": "user_id is required"})
     try:
-        users = User.get_all_users()
+        sent = EmailModel.get_user_sent_emails(user_id)
+        received = EmailModel.get_user_received_emails(user_id)
+    except:
+        return (
+            jsonify(
+                {
+                    "status": "error",
+                    "data": "An error has occurred retrieving user's emails",
+                }
+            ),
+            500,
+        )
+
+    return jsonify({"status": "success", "data": {"sent": sent, "received": received}})
+
+
+@bp.route("/users", methods=(["GET"]))
+def get_all_emails():
+    try:
+        users = UserModel.get_all_users()
     except:
         return (
             jsonify(
@@ -38,25 +60,27 @@ def get():
 
 
 @bp.route("/send", methods=(["POST"]))
-def send():
+def send_email():
     data = request.json
-    sender = data["sender"]
-    recipient = data["recipient"]
-    subject = data["subject"]
-    body = data["body"]
+    if not data:
+        return jsonify({"status": "fail", "data": "No data was sent"}), 400
+    sender = data.get("sender", None)
+    recipient = data.get("recipient", None)
+    subject = data.get("subject", None)
+    body = data.get("body", None)
 
-    error = None
+    error = []
     if not sender:
-        error = "sender is required"
+        error.append("Sender field is required")
     if not recipient:
-        error = "recipient is required."
+        error.append("Recipient field is required.")
     if not subject:
-        error = "subject is required"
+        error.append("Subject field is required")
     if not body:
-        error = "body is required"
-    if error is not None:
+        error.append("Body field is required")
+    # 'if not error:' doesn't seem to work for some reason
+    if len(error) is not 0:
         return jsonify({"status": "fail", "data": error}), 400
-
     else:
         try:
             sender_data = UserModel.get_user_by_userName(sender)
@@ -88,13 +112,26 @@ def send():
                 500,
             )
         try:
-            EmailModel.save_email(
+            email = EmailModel.save_email(
                 recipient_data[0]["userId"], sender_data[0]["userId"], subject, body
+            )
+            del sender_data[0]["password"]
+            del recipient_data[0]["password"]
+            return (
+                jsonify(
+                    {
+                        "status": "success",
+                        "data": {
+                            "email": email,
+                            "sender": sender_data,
+                            "recipient": recipient_data,
+                        },
+                    }
+                ),
+                201,
             )
         except:
             return (
                 jsonify({"status": "error", "data": "Error saving the message"}),
                 500,
             )
-
-    return jsonify({"status": "success", "data": "Message sent successfully"}), 201
