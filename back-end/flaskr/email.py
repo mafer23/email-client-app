@@ -32,6 +32,12 @@ def get_emails_user():
             ),
             500,
         )
+    if len(sent) is not 0:
+        for i in range(len(sent)):
+            del sent[i]["sender"]["password"]
+    if len(received) is not 0:
+        for i in range(len(received)):
+            del received[i]["sender"]["password"]
 
     return jsonify({"status": "success", "data": {"sent": sent, "received": received}})
 
@@ -83,8 +89,8 @@ def send_email():
         return jsonify({"status": "fail", "data": error}), 400
     else:
         try:
-            sender_data = UserModel.get_user_by_userName(sender)
-            recipient_data = UserModel.get_user_by_userName(recipient)
+            sender_data = UserModel.get_user_by_userId(sender)
+            recipient_data = UserModel.get_user_by_userId(recipient)
             if not sender_data:
                 return (
                     jsonify({"status": "fail", "data": "Sender email does not exist"}),
@@ -112,9 +118,7 @@ def send_email():
                 500,
             )
         try:
-            email = EmailModel.save_email(
-                recipient_data[0]["userId"], sender_data[0]["userId"], subject, body
-            )
+            email = EmailModel.save_email(sender, recipient, subject, body)
             del sender_data[0]["password"]
             del recipient_data[0]["password"]
             return (
