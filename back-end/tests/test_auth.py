@@ -16,6 +16,6 @@ def test_register_missing_data(client):
         "password": "testpassword"
     }
     response = client.post('/auth/register', json=data)
-    assert response.status_code == 500
+    assert response.status_code == 400 
     assert b"Username is required" in response.data
-
+    

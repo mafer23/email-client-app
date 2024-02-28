@@ -34,8 +34,7 @@ def test_send_email(client, app, user_one, user_two):
         "subject": "Test Subject",
         "body": "Test Body",
     }
-    response = client.post("/email/send", json=payload)
-    assert response.data == "hola"
+    response = client.post("/email/send", json=payload) 
     assert response.status_code == 201
     data = response.get_json()
     assert "status" in data

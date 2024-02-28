@@ -12,23 +12,22 @@ def register():
     data = request.json
     if not data:
         return (jsonify({"status": "fail", "data": "No data was sent"}),)
-    username = data["username"]
-    firstname = data["firstname"]
-    lastname = data["lastname"]
-    password = data["password"]
+    username = data.get("username", None)
+    firstname = data.get("firstname", None)
+    lastname = data.get("lastname", None)
+    password = data.get("password", None)
 
-    error = None
-
+    error = []
     if not username:
-        error = "Username is required"
-    elif not firstname:
-        error = "First name is required"
-    elif not lastname:
-        error = "Last name is required"
-    elif not password:
-        error = "Password is required."
+        error.append("Username is required")
+    if not firstname:
+        error.append("First name is required")
+    if not lastname:
+        error.append("Last name is required")
+    if not password:
+        error.append("Password is required.")
 
-    if error is not None:
+    if len(error) != 0:
         return jsonify({"status": "fail", "data": error}), 400
     else:
         try:
@@ -71,16 +70,16 @@ def login():
     data = request.json
     if not data:
         return jsonify({"status": "fail", "data": "No data was sent"}), 400
-    username = data["username"]
-    password = data["password"]
-    error = None
+    username = data.get("username", None)
+    password = data.get("password", None)
+    error = []
 
     if not username:
-        error = "username was not provided"
+        error.append("username was not provided")
     elif not password:
-        error = "password was not provided"
+        error.append("password was not provided")
 
-    if error is not None:
+    if len(error) != 0:
         return jsonify({"status": "fail", "data": error}), 400
     else:
         try:
