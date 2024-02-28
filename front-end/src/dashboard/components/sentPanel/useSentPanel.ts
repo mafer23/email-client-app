@@ -1,5 +1,4 @@
 //* Importing types
-import { typeMessageCard } from "../../../types/types";
 
 //* Importing custom hook
 import { useEmailStores } from "../../../hooks/useEmailStores";

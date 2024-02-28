@@ -27,8 +27,8 @@ export const MessagePanel = () => {
           <img src={ iconPerfil }></img>
           
           <div className="messagePanel__information__column">
-            <p>{ `${ selectedEmail?.sender.firstName} ${selectedEmail?.sender.lastName }` }</p>
-            <span>{ selectedEmail?.sender.userName }</span>
+            <p>{ `${ selectedEmail?.user.firstName} ${selectedEmail?.user.lastName }` }</p>
+            <span>{ selectedEmail?.user.userName }</span>
           </div>
         
         </div>

@@ -29,7 +29,7 @@ export type typeEmailSlice = {
     emailsReceived: Received[] | [];
     emailSent: Received[] | [];
     selectedEmail: Received | undefined;
-    emailsUsers: [];
+    emailsUsers: {value: number, label: string}[];
     isLoading: boolean;
 }
 
@@ -61,8 +61,8 @@ export interface DataMessagesUser {
 }
 
 export interface Received {
-    email:  Email;
-    sender: Sender;
+    email: Email;
+    user:  User;
 }
 
 export interface Email {
@@ -72,11 +72,17 @@ export interface Email {
     createdAt: Date;
 }
 
-export interface Sender {
+export interface User {
     userId:    number;
     userName:  string;
     firstName: string;
     lastName:  string;
+}
+
+export interface DataNewMessage {
+    email:     Email[];
+    sender:    User[];
+    recipient: User[];
 }
 
 //* Components

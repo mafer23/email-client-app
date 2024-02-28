@@ -9,17 +9,13 @@ import { InputSelect } from "../../../plugins/InputSelectPlugin/InputSelect";
 export const MessageModal = () => {
 
     const { 
-        onHandleCloseMessageModal, 
         formState, 
+        emailsUsers,
+        onHandleCloseMessageModal, 
         onInputChange,
         onInputSelect,
         onSentNewMessage 
     } = useMessageModal();
-
-    const options = [
-        {value: 1, label: "mateo.olaya.aricapa@gmail.com"},
-        {value: 2, label: "camila@gmail.com"}
-    ]
 
     return (
         <div className="messageModal">
@@ -33,7 +29,7 @@ export const MessageModal = () => {
 
                     <div className="messageModal__container__inputs__select">
                         <InputSelect
-                            dataOptions={ options }
+                            dataOptions={ emailsUsers }
                             onSelect={ onInputSelect } 
                         />
                     </div>
@@ -54,7 +50,7 @@ export const MessageModal = () => {
 
                 <div className="messageModal__container__content">
                     <textarea 
-                        name="content"
+                        name="body"
                         value={ formState.body }
                         onChange={ onInputChange }
                     />

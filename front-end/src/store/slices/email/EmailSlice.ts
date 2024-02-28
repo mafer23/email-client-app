@@ -4,7 +4,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { 
     DataMessagesUser, 
     Received, 
-    typeDataMessage, 
+    User, 
     typeEmailSlice 
 } from "../../../types/types";
 
@@ -31,12 +31,22 @@ export const emailSlice = createSlice({
         setSelectEmail: (state, action: PayloadAction<Received>) => { //* Seleccionando un email
             state.selectedEmail = action.payload;
         },
-        setSendNewMessage: (state, action: PayloadAction<typeDataMessage>) => { //* Guardando nuevo email
-            //state.emailSent = [ ...state.emailSent, action.payload ];
+        setSendNewMessage: (state, action: PayloadAction<Received>) => { //* Guardando nuevo email
+            state.emailSent = [ ...state.emailSent, action.payload ];
             state.isLoading = false;
         },
         setReseteSelectEmail: (state) => {
             state.selectedEmail = undefined;
+        },
+        setGetEmailsUser: (state, action: PayloadAction<User[]>) => { //* Guardando los emails de todos los usuarios
+
+            const newList = action.payload.map(user => {
+                return { value: user.userId, label: user.userName };
+            });
+
+            state.emailsUsers = newList;
+            state.isLoading = false;
+
         },
         setResetEmailSlice: (state) => {
             state.emailsReceived = [], 
@@ -54,5 +64,6 @@ export const {
     setSelectEmail,
     setSendNewMessage,
     setReseteSelectEmail,
-    setResetEmailSlice
+    setResetEmailSlice,
+    setGetEmailsUser
  } = emailSlice.actions;

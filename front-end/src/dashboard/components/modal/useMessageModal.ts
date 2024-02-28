@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 //* Importing custom hook
 import { useAuthStore } from "../../../hooks/useAuthStore";
 import { useEmailStores } from "../../../hooks/useEmailStores";
@@ -15,21 +17,31 @@ export const useMessageModal = () => {
         subject: '',
         body: '', 
     });
-    const { onHandleSentEmailUser, isLoading } = useEmailStores();
+    const { 
+        onHandleSentEmailUser, 
+        onHandleAllEmailsUsers, 
+        isLoading,
+        emailsUsers 
+    } = useEmailStores();
 
     //* Methods
     const onSentNewMessage = async(): Promise<void> => {
         await onHandleSentEmailUser( formState );
 
-        if ( isLoading ) onHandleCloseMessageModal();
+        if ( !isLoading ) onHandleCloseMessageModal();
     }
 
     //* UseEffect
-
+    useEffect(() => {
+ 
+        onHandleAllEmailsUsers();
+        
+    }, []);
 
     return {
         //* Attributes
         formState,
+        emailsUsers,
         
         //* Methods
         onHandleCloseMessageModal,

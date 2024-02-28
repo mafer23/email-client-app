@@ -20,6 +20,7 @@ export const InboxPanel = () => {
 
                 { emailsReceived.map( dataEmail => 
                     <MessageCard 
+                        key={ dataEmail.email.emailId }
                         data={ dataEmail }
                         namePanel="inbox"
                     />

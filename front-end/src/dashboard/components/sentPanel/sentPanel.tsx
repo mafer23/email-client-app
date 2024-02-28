@@ -19,7 +19,8 @@ export const SentPanel = () => {
             <div className="inboxPanel">
 
                 { emailSent.map( dataEmail => 
-                    <MessageCard 
+                    <MessageCard
+                        key={ dataEmail.email.emailId }
                         data={ dataEmail }
                         namePanel="sent"
                     />

@@ -17,7 +17,7 @@ interface MessageCardOptions {
 export const MessageCard = ( options: MessageCardOptions ) => {
 
     const { onClickCard } = useMessageCard( options.namePanel!, options.data );
-    const { email, sender } = options.data;
+    const { email, user } = options.data;
     const dateEmail = convertDate( email.createdAt );
 
     return (
@@ -27,7 +27,7 @@ export const MessageCard = ( options: MessageCardOptions ) => {
                 <div style={ {display: 'none'} }>
                     New
                 </div>
-                <h1>{ `${ sender.firstName } ${ sender.lastName }` }</h1>
+                <h1>{ `${ user.firstName } ${ user.lastName }` }</h1>
             </div>
 
             <div className="messageCard__subject">
