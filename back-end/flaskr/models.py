@@ -119,10 +119,10 @@ class Email(db.Model):
         serialized_info = []
         for row in results:
             email = email_schema.get_email(row.Email)
-            sender = user_schema.get_user(row.User)
+            recipient = user_schema.get_user(row.User)
             serialized_info.append({
                 "email": email,
-                "sender": sender 
+                "recipient": recipient 
             })
         return serialized_info
     

@@ -34,7 +34,7 @@ def get_emails_user():
         )
     if len(sent) is not 0:
         for i in range(len(sent)):
-            del sent[i]["sender"]["password"]
+            del sent[i]["recipient"]["password"]
     if len(received) is not 0:
         for i in range(len(received)):
             del received[i]["sender"]["password"]
