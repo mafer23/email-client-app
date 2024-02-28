@@ -1,6 +1,5 @@
 from flask import (
     Blueprint,
-    flash,
     jsonify,
     request,
 )
@@ -18,7 +17,7 @@ bp = Blueprint("email", __name__, url_prefix="/email")
 def get_emails_user():
     user_id = request.args.get("user_id")
     if not user_id:
-        return jsonify({"status": "fail", "data": "user_id is required"})
+        return jsonify({"status": "fail", "data": "user_id is required"}), 400
     try:
         sent = EmailModel.get_user_sent_emails(user_id)
         received = EmailModel.get_user_received_emails(user_id)
@@ -39,7 +38,7 @@ def get_emails_user():
         for i in range(len(received)):
             del received[i]["user"]["password"]
 
-    return jsonify({"status": "success", "data": {"sent": sent, "received": received}})
+    return jsonify({"status": "success", "data": {"sent": sent, "received": received}}), 200
 
 
 @bp.route("/users", methods=(["GET"]))
