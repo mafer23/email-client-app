@@ -7,6 +7,7 @@ import { typeButtonsOptions } from "../../../types/types";
 
 //* Importing custom hook
 import { useUiStore } from "../../../hooks/useUiStore";
+import { useEmailStores } from "../../../hooks/useEmailStores";
 
 export const useNavBar = () => {
   
@@ -17,19 +18,21 @@ export const useNavBar = () => {
         onHandleOpenMessageModal 
     } = useUiStore();
 
+    const { emailSent, emailsReceived } = useEmailStores();
+
     const dataButtonOptions: typeButtonsOptions[] = [
         { 
             id: 1, 
             name: 'Inbox', 
             icon: iconInbox, 
-            amount: 2, 
+            amount: emailsReceived.length, 
             functionClick: onHandleOpenInbux 
         },
         { 
             id: 2, 
             name: 'Sent', 
             icon: iconSent, 
-            amount: 2, 
+            amount: emailSent.length, 
             functionClick: onHandleOpenSent 
         }
     ];
@@ -42,7 +45,6 @@ export const useNavBar = () => {
 
         //* Methods
         onHandleOpenMessageModal,
-
     }
 
 }

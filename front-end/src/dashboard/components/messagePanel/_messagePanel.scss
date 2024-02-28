@@ -1,11 +1,25 @@
 @import "../../../styles/settings";
 
 .messagePanel{
-    @include DisplayFlex(flex-start,center,column,none,none);
+    width: 100%;
+    @include DisplayFlex(
+        flex-start,
+        center,
+        column,
+        none,
+        none
+    );
     @include StylesText(1em, 400, $color2);
     margin-top: 1%;
+
     &__information{
-        @include DisplayFlex(flex-start,center,row,none,none);
+        @include DisplayFlex(
+            flex-start,
+            center,
+            row,
+            none,
+            none
+        );
         margin-left: 2%;
 
         &__column{
@@ -13,24 +27,34 @@
             width: 20em;
             height: fit-content;
             margin-top: 2%;
-            @include DisplayFlex(flex-start,center,column,none,none);
+            @include DisplayFlex(
+                flex-start,
+                center,
+                column,
+                none,
+                none
+            );
+        
+            p{
+                @include StylesText(0.95em, 700, $color2); 
+            }
+
+            span {
+                @include StylesText(0.70em, 400, $color2); 
+            }
+        
         }
     }
+
     &__information > img{
         width: 55px;
         height: 55px;
         position: relative;
         right: 2%;
     }
-}
 
-span {
-    @include StylesText(0.70em, 400, $color2); 
-}
-p{
-    @include StylesText(0.95em, 700, $color2); 
-}
-section{
-    margin-left: 8%;
-    margin-top:2%;
+    section{
+        margin-left: 8%;
+        margin-top:2%;
+    }
 }

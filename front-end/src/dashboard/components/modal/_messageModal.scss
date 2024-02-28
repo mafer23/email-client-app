@@ -49,14 +49,30 @@
                 1em
             );
 
-            input {
+            &__select {
                 width: 100%;
-                height: 2.5em;
-                background-color: transparent;
-                border-radius: 10px;
-                border: none;
-                outline: none;
-                @include StylesText(0.85em, 400, $color2);
+            }
+
+            &__subject {
+                width: 100%;
+                border-radius: 5px;
+                border: 1px solid $color3;
+                @include DisplayFlex(
+                    center,
+                    center,
+                    none,
+                    none,
+                    0
+                );
+
+                input {
+                    width: 96%;
+                    height: 2.5em;
+                    background-color: transparent;
+                    border: none;
+                    outline: none;
+                    @include StylesText(0.85em, 400, $color2);
+                }
             }
         }
 

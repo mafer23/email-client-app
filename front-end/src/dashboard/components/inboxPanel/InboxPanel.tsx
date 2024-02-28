@@ -11,18 +11,16 @@ import { useInboxPanel } from "./useInboxPanel";
 
 export const InboxPanel = () => {
 
-    const { messageTest } = useInboxPanel();
+    const { emailsReceived } = useInboxPanel();
 
     return (
         <LayoutPanel isOpenMessage={ false } title="Email Inbox">
 
             <div className="inboxPanel">
 
-                { messageTest.map(({ dateMessage, recipient, subject }) => 
+                { emailsReceived.map( dataEmail => 
                     <MessageCard 
-                        dateMessage={dateMessage}
-                        recipient={recipient}
-                        subject={subject}
+                        data={ dataEmail }
                         namePanel="inbox"
                     />
                 ) } 

@@ -1,3 +1,7 @@
+//* Importing custom hook
+import { useEmailStores } from "../../../hooks/useEmailStores";
+
+//* Importing types
 import { typeMessageCard } from "../../../types/types";
 
 export const useInboxPanel = () => {
@@ -26,11 +30,14 @@ export const useInboxPanel = () => {
         }
     ];
 
+    const { emailsReceived } = useEmailStores();
+
     //* Methods
 
     return {
         //* Attributes
         messageTest,
+        emailsReceived
 
         //* Methods
 

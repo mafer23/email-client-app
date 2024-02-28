@@ -1,21 +1,44 @@
 import "./_messagePanel.scss";
-//* Importing types
-import { typeMessage } from "../../../types/types";
-import userpic from "../../../images/userProfile.png"
-export const MessagePanel = ({ user, message, email }: typeMessage) => {
+
+//* Importing image
+import iconPerfil from "../../../images/userProfile.png";
+
+//* Importing Layout component
+import { LayoutPanel } from "../../layout/LayoutPanel";
+
+//* Importing custom hook
+import { useMessagePanel } from "./useMessagePanel";
+
+export const MessagePanel = () => {
+
+  const { selectedEmail } = useMessagePanel();
+
   return (
-    <div className="messagePanel">
-      <div className="messagePanel__information">
-        <img src={userpic}></img>
-        <div className="messagePanel__information__column">
-          <p>{user}</p>
-          <span>{email}</span>
+    <LayoutPanel 
+      isOpenMessage={ true } 
+      title={ selectedEmail?.email.subject } 
+      dateEmail={ selectedEmail?.email.createdAt }
+    >
+
+      <div className="messagePanel">
+        
+        <div className="messagePanel__information">
+          
+          <img src={ iconPerfil }></img>
+          
+          <div className="messagePanel__information__column">
+            <p>{ `${ selectedEmail?.sender.firstName} ${selectedEmail?.sender.lastName }` }</p>
+            <span>{ selectedEmail?.sender.userName }</span>
+          </div>
+        
         </div>
+
+        <section>
+          { selectedEmail?.email.body }
+        </section>
       </div>
 
-      <section>
-        {message}
-      </section>
-    </div>
+    </LayoutPanel>
   );
+
 }

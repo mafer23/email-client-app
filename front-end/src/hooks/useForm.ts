@@ -1,5 +1,9 @@
 import { useState, ChangeEvent } from "react";
 
+type inputSelectOptions = {
+    value: number | undefined;
+    name: string;
+}
 
 export const useForm = <T>( initialForm: T ) => {
 
@@ -12,12 +16,18 @@ export const useForm = <T>( initialForm: T ) => {
         setFormState({ ...formState, [name]: value });
     }
 
+    const onInputSelect = ( options: inputSelectOptions ): void => {
+        const { name, value } = options;
+        setFormState({ ...formState, [name]: value });
+    }
+
     return {
         //* Attributes
         formState,
 
         //* Methods
         onInputChange,
+        onInputSelect
     }
 
 }

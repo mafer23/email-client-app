@@ -5,8 +5,8 @@ import { Header } from "../components/header/Header";
 import { NavBar } from "../components/navBar/NavBar";
 import { InboxPanel } from "../components/inboxPanel/InboxPanel";
 import { SentPanel } from "../components/sentPanel/sentPanel";
-import { ViewPanel } from "../components/viewPanel/viewPanel";
 import { MessageModal } from "../components/modal/MessageModal";
+import { MessagePanel } from "../components/messagePanel/MessagePanel";
 
 //* Importing images
 import iconLogo from "../../images/Logo.png";
@@ -41,7 +41,7 @@ export const DashboardPage = () => {
             { messageModal && <MessageModal/> }
             { statePanels[0] && <InboxPanel/> }
             { statePanels[1] && <SentPanel/>  }
-            { statePanels[2] && <ViewPanel/>  }
+            { statePanels[2] && <MessagePanel/>  }
           </div>
 
         </div>
