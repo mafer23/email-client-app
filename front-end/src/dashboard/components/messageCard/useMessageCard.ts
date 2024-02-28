@@ -2,14 +2,20 @@ import { useEffect } from "react";
 
 //* Importing custom hooks
 import { useUiStore } from "../../../hooks/useUiStore"
+import { useEmailStores } from "../../../hooks/useEmailStores";
 
-export const useMessageCard = ( namePanel: string ) => {
+//* Importing types
+import { Received } from "../../../types/types";
+
+export const useMessageCard = ( namePanel: string, data: Received ) => {
 
     //* Attributes
     const { onHandleOpenMessage, onHandleSetPreviousPanelStatus } = useUiStore();
+    const { onHandleSelectEmail } = useEmailStores();
 
     //* Methods
     const onClickCard = (): void => {
+        onHandleSelectEmail( data );
         onHandleOpenMessage();
     }
 

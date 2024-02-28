@@ -3,9 +3,17 @@ import { createSlice } from "@reduxjs/toolkit";
 //* Importing types
 import { typeAuthSlice } from "../../../types/types"; 
 
+const initialStateUser = {
+    userId: 0,
+    userName: "",
+    firstName: "",
+    lastName: "",
+    password: ""
+}
+
 const initialState: typeAuthSlice = {
-    status: 'authenticated', //authenticated, checking, no-authenticated
-    user: {},
+    status: 'no-authenticated', //authenticated, checking, no-authenticated
+    user: initialStateUser,
     errorMessage: undefined
 }
 
@@ -15,7 +23,7 @@ export const authSlice = createSlice({
     reducers: {
         onChecking: (state) => {
             state.status = 'checking';
-            state.user = {};
+            state.user = initialStateUser;
             state.errorMessage = undefined;
         },
         onLogin: (state, { payload }) => {
@@ -25,7 +33,7 @@ export const authSlice = createSlice({
         },
         onLogout: (state, { payload }) => {
             state.status = 'no-authenticated';
-            state.user = {};
+            state.user = initialStateUser;
             state.errorMessage = payload;
         }
     }

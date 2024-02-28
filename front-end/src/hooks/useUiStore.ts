@@ -9,13 +9,18 @@ import {
     onOpenMessageModal, 
     onOpenMessagePanel, 
     onOpenSentPanel, 
+    onResetUiSlice, 
     onSetPreviousPanelStatus
 } from "../store/slices/ui/UiSlice";
 
 export const useUiStore = () => {
 
     //* Attributes
-    const { statePanels, previousPanelStatus, messageModal } = useSelector((state: RootState) => state.ui);
+    const { 
+        statePanels, 
+        previousPanelStatus, 
+        messageModal 
+    } = useSelector((state: RootState) => state.ui);
     const dispatch = useDispatch();
 
     //* Methods
@@ -43,6 +48,10 @@ export const useUiStore = () => {
         dispatch( onCloseMessageModal() );
     }
 
+    const onHandleResetUiSlice = (): void => {
+        dispatch( onResetUiSlice() );
+    }
+
     return {
         //* Attributes
         statePanels,
@@ -55,6 +64,7 @@ export const useUiStore = () => {
         onHandleOpenMessage,
         onHandleSetPreviousPanelStatus,
         onHandleOpenMessageModal,
-        onHandleCloseMessageModal
+        onHandleCloseMessageModal,
+        onHandleResetUiSlice
     }
 }

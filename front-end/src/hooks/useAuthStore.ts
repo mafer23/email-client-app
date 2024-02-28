@@ -7,6 +7,7 @@ import { onLogin, onLogout } from "../store/slices/auth/AuthSlice";
 
 //* Importing AXIOS
 import emailClientApi from "../api/emailClientApi";
+import axios from "axios";
 
 //* Importing types
 import { typeLoginUser } from "../types/types";
@@ -24,18 +25,15 @@ export const useAuthStore = () => {
             
             const { data } = await emailClientApi.post('/auth/login', { username: email, password });
 
-            if ( data === "Wrong password") {
-                dispatch( onLogout( data ) );
-            } else if ( data === `Username ${email} is not registered` ) {
-                dispatch( onLogout( data ) );
-            } else if ( data === "Couldn't connect to the db") {
-                dispatch( onLogout( data ) );
-            } else {
-                dispatch( onLogin( data[0] ) );
+            dispatch( onLogin( data.data ) );
+
+        } catch ( error ) {
+
+            if ( axios.isAxiosError(error) ) {
+                const { response } = error;
+                dispatch( onLogout( response?.data.data ) );
             }
 
-        } catch (error) {
-            //console.log(error);
         }
 
     }

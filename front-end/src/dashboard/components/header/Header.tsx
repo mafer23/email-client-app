@@ -19,7 +19,7 @@ export const Header = () => {
 
         <div className="header__photoUser">
 
-            <h2>{ `${ user.firstName } ${ user.lasttName }` }</h2>
+            <h2>{ `${ user.firstName } ${ user.lastName }` }</h2>
 
             <div className="header__photoUser__image">
                 <img src={ photoPerfil } alt="" />

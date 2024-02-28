@@ -39,6 +39,11 @@ export const uiSlice = createSlice({
         },
         onCloseMessageModal: (state) => {
             state.messageModal = false;
+        },
+        onResetUiSlice: (state) => {
+            state.statePanels = [true, false, false],
+            state.previousPanelStatus = undefined,
+            state.messageModal = false
         }
     }
 });
@@ -49,5 +54,6 @@ export const {
     onOpenMessagePanel,
     onSetPreviousPanelStatus,
     onOpenMessageModal,
-    onCloseMessageModal
+    onCloseMessageModal,
+    onResetUiSlice
  } = uiSlice.actions;

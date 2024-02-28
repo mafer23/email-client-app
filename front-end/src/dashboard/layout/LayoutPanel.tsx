@@ -9,9 +9,13 @@ import { typeLayoutPanel } from "../../types/types";
 //* Importing custom hook
 import { useLayoutPanel } from "./useLayoutPanel";
 
-export const LayoutPanel = ({ children, title, isOpenMessage = false }: typeLayoutPanel) => {
+//* Helper
+import { convertDate } from "../../helpers/convertDate";
+
+export const LayoutPanel = ({ children, title, isOpenMessage = false, dateEmail = new Date() }: typeLayoutPanel) => {
 
     const { onClickButtonBack } = useLayoutPanel();
+    const formatDate = convertDate( dateEmail );
 
     return (
         <div className="layoutPanel animate__animated animate__fadeIn">
@@ -36,7 +40,7 @@ export const LayoutPanel = ({ children, title, isOpenMessage = false }: typeLayo
 
                 { isOpenMessage &&  
                     <div className="layoutPanel__container__date">
-                        <h2>18/02/2024 3:12 p. m.</h2>
+                        <h2>{ formatDate }</h2>
                     </div>
                 }
 

@@ -1,21 +1,31 @@
 //* Importing custom hook
+import { useAuthStore } from "../../../hooks/useAuthStore";
+import { useEmailStores } from "../../../hooks/useEmailStores";
 import { useForm } from "../../../hooks/useForm";
 import { useUiStore } from "../../../hooks/useUiStore"
 
 export const useMessageModal = () => {
 
     //* Attributes
+    const { user } = useAuthStore();
     const { onHandleCloseMessageModal } = useUiStore();
-    const { formState, onInputChange } = useForm({ 
-        recipient: '',
+    const { formState, onInputChange, onInputSelect } = useForm({
+        sender: user.userId, //* Remitente
+        recipient: 0, //* Destinatario
         subject: '',
-        content: '' 
+        body: '', 
     });
+    const { onHandleSentEmailUser, isLoading } = useEmailStores();
 
     //* Methods
-    const onSentNewMessage = (): void => {
-        console.log( formState );
+    const onSentNewMessage = async(): Promise<void> => {
+        await onHandleSentEmailUser( formState );
+
+        if ( isLoading ) onHandleCloseMessageModal();
     }
+
+    //* UseEffect
+
 
     return {
         //* Attributes
@@ -24,7 +34,8 @@ export const useMessageModal = () => {
         //* Methods
         onHandleCloseMessageModal,
         onInputChange,
-        onSentNewMessage
+        onSentNewMessage,
+        onInputSelect
     }
 
 }

@@ -3,14 +3,23 @@ import "./_messageModal.scss";
 //* Importing custom hook
 import { useMessageModal } from "./useMessageModal";
 
+//* Importing plugin
+import { InputSelect } from "../../../plugins/InputSelectPlugin/InputSelect";
+
 export const MessageModal = () => {
 
     const { 
         onHandleCloseMessageModal, 
         formState, 
         onInputChange,
+        onInputSelect,
         onSentNewMessage 
     } = useMessageModal();
+
+    const options = [
+        {value: 1, label: "mateo.olaya.aricapa@gmail.com"},
+        {value: 2, label: "camila@gmail.com"}
+    ]
 
     return (
         <div className="messageModal">
@@ -22,28 +31,31 @@ export const MessageModal = () => {
 
                 <div className="messageModal__container__inputs">
 
-                    <input 
-                        type="text" 
-                        name="recipient"
-                        placeholder="Recipient"
-                        value={ formState.recipient }
-                        onChange={ onInputChange }
-                    />
+                    <div className="messageModal__container__inputs__select">
+                        <InputSelect
+                            dataOptions={ options }
+                            onSelect={ onInputSelect } 
+                        />
+                    </div>
 
-                    <input 
-                        type="text" 
-                        name="subject"
-                        placeholder="Subject"
-                        value={ formState.subject }
-                        onChange={ onInputChange }
-                    />
+                    <div className="messageModal__container__inputs__subject">
+
+                        <input 
+                            type="text" 
+                            name="subject"
+                            placeholder="Subject"
+                            value={ formState.subject }
+                            onChange={ onInputChange }
+                        />
+
+                    </div>
 
                 </div>
 
                 <div className="messageModal__container__content">
                     <textarea 
                         name="content"
-                        value={ formState.content }
+                        value={ formState.body }
                         onChange={ onInputChange }
                     />
                 </div>
