@@ -34,10 +34,10 @@ def get_emails_user():
         )
     if len(sent) is not 0:
         for i in range(len(sent)):
-            del sent[i]["recipient"]["password"]
+            del sent[i]["user"]["password"]
     if len(received) is not 0:
         for i in range(len(received)):
-            del received[i]["sender"]["password"]
+            del received[i]["user"]["password"]
 
     return jsonify({"status": "success", "data": {"sent": sent, "received": received}})
 
