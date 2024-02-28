@@ -118,7 +118,7 @@ def send_email():
                 500,
             )
         try:
-            email = EmailModel.save_email(sender, recipient, subject, body)
+            email = EmailModel.save_email(recipient, sender, subject, body)
             del sender_data[0]["password"]
             del recipient_data[0]["password"]
             return (
