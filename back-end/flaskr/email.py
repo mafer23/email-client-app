@@ -31,10 +31,10 @@ def get_emails_user():
             ),
             500,
         )
-    if len(sent) is not 0:
+    if len(sent) != 0:
         for i in range(len(sent)):
             del sent[i]["user"]["password"]
-    if len(received) is not 0:
+    if len(received) != 0:
         for i in range(len(received)):
             del received[i]["user"]["password"]
 
@@ -84,7 +84,7 @@ def send_email():
     if not body:
         error.append("Body field is required")
     # 'if not error:' doesn't seem to work for some reason
-    if len(error) is not 0:
+    if len(error) != 0:
         return jsonify({"status": "fail", "data": error}), 400
     else:
         try:
