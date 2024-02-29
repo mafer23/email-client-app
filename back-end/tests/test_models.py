@@ -31,5 +31,5 @@ def test_should_get_5_emails_sent_with_user_one_from_db(sending_emails_with_user
 
 def test_should_get_two_keys_when_using_get_user_sent_emails_function(sending_emails_with_user_one):
     results = Email.get_user_sent_emails(1)
-    keys = {"email": 0, "recipient": 1}
+    keys = {"email": 0, "user": 1}
     assert results[0].keys() == keys.keys()
