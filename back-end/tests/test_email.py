@@ -2,14 +2,9 @@ import pytest
 from flaskr import create_app
 from flaskr.models import User
 from unittest.mock import patch
-from conftest import app, client, user_one, user_two
 
 
-def test_get_emails_user(client):
-    try:
-        User.save_user("test@test.com", "TARS", "CASE", "123456")
-    except:
-        pytest.fail
+def test_get_emails_user(client, user_one):
     response = client.get("/email/user", query_string ={"user_id": "1"}) 
     assert response.status_code == 200
     data = response.get_json() 
