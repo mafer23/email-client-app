@@ -17,7 +17,7 @@ Once the previous step is completed, it's necessary to install the project depen
 ```
 npm install
 ```
-The installs all dependencies that the project needs. 
+This installs all dependencies that the project needs. 
 
 ![](https://drive.google.com/uc?export=view&id=12YHG-BMntdOCAbDiW1MqKJdRm4pTO7cx)
 
