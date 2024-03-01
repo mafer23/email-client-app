@@ -99,8 +99,8 @@ def login():
         else:
             db_password = user[0]["password"]
             is_match = Password.compare_passwords(password, db_password)
-            if is_match:
-                del user[0]["password"]
-                return jsonify({"status": "success", "data": user[0]}), 200
-            else:
+            if not is_match:
                 return jsonify({"status": "fail", "data": "Wrong password"}), 400
+
+    del user[0]["password"]
+    return jsonify({"status": "success", "data": user[0]}), 200

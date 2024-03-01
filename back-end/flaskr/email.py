@@ -38,11 +38,14 @@ def get_emails_user():
         for i in range(len(received)):
             del received[i]["user"]["password"]
 
-    return jsonify({"status": "success", "data": {"sent": sent, "received": received}}), 200
+    return (
+        jsonify({"status": "success", "data": {"sent": sent, "received": received}}),
+        200,
+    )
 
 
 @bp.route("/users", methods=(["GET"]))
-def get_all_emails():
+def get_all_users():
     try:
         users = UserModel.get_all_users()
     except:
