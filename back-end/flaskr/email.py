@@ -10,18 +10,23 @@ from .models import User as UserModel
 from smtp.mail import Email
 from smtp.client import SMTPClient
 
+# Create a blueprint for email-related routes
 bp = Blueprint("email", __name__, url_prefix="/email")
 
 
+# Endpoint to get emails sent and received for a specific user
 @bp.route("/user", methods=(["GET"]))
-def get_emails_user():
+def get_user_emails():
     user_id = request.args.get("user_id")
+    # Check if user_id is provided
     if not user_id:
         return jsonify({"status": "fail", "data": "user_id is required"}), 400
     try:
+        # Retrieve sent and received emails for the user
         sent = EmailModel.get_user_sent_emails(user_id)
         received = EmailModel.get_user_received_emails(user_id)
     except:
+        # Handle errors in retrieving emails
         return (
             jsonify(
                 {
@@ -31,12 +36,14 @@ def get_emails_user():
             ),
             500,
         )
+        # Remove passwords from user data
     if len(sent) != 0:
         for i in range(len(sent)):
             del sent[i]["user"]["password"]
     if len(received) != 0:
         for i in range(len(received)):
             del received[i]["user"]["password"]
+    # Return the emails
 
     return (
         jsonify({"status": "success", "data": {"sent": sent, "received": received}}),
@@ -44,11 +51,14 @@ def get_emails_user():
     )
 
 
+# Endpoint to get all users
 @bp.route("/users", methods=(["GET"]))
 def get_all_users():
     try:
+        # Retrieve all users
         users = UserModel.get_all_users()
     except:
+        # Handle errors in retrieving users
         return (
             jsonify(
                 {
@@ -58,7 +68,7 @@ def get_all_users():
             ),
             500,
         )
-
+    # Remove passwords from user data
     if not users:
         return jsonify({"status": "success", "data": users}), 200
     else:
@@ -67,9 +77,11 @@ def get_all_users():
         return jsonify({"status": "success", "data": users}), 200
 
 
+# Endpoint to send an email
 @bp.route("/send", methods=(["POST"]))
 def send_email():
     data = request.json
+    # Check if data is provided
     if not data:
         return jsonify({"status": "fail", "data": "No data was sent"}), 400
     sender = data.get("sender", None)
@@ -78,6 +90,7 @@ def send_email():
     body = data.get("body", None)
 
     error = []
+    # Validate required fields
     if not sender:
         error.append("Sender field is required")
     if not recipient:
@@ -91,6 +104,7 @@ def send_email():
         return jsonify({"status": "fail", "data": error}), 400
     else:
         try:
+            # Retrieve sender and recipient data
             sender_data = UserModel.get_user_by_userId(sender)
             recipient_data = UserModel.get_user_by_userId(recipient)
             if not sender_data:
@@ -108,10 +122,12 @@ def send_email():
         except ValueError as str:
             return str
         try:
+            # Create email message
             msg = Email(recipient, sender, subject, body).createEmail()
         except:
             return jsonify({"status": "error", "data": "Message creation failed"}), 500
         try:
+            # Send email
             smtp_client = SMTPClient()
             smtp_client.sendEmail(msg)
         except:
@@ -120,7 +136,10 @@ def send_email():
                 500,
             )
         try:
+            # Save email
+
             email = EmailModel.save_email(recipient, sender, subject, body)
+            # Remove passwords from user data
             del sender_data[0]["password"]
             del recipient_data[0]["password"]
             return (
