@@ -1,6 +1,42 @@
 # Stage Back End 
 
-TEXT...
+There are some steps that needs to be followed in order to work in the backend part:
+
+### Step 1: Open a terminal with the directory of the backend part
+
+If you already clone the repository, open a terminal in the directory in which the project is saved and the move to the backend folder. 
+
+### Step 2: Virtual enviorement creation
+
+Now, run the next command in the terminal:
+
+    python -m venv env
+    
+This command will create a virtual enviorement to mantin the packets in one place, and also to prevent it to install in the PC.
+
+### Step 3: Install the project
+
+    pip install -e .
+    
+This command will install the project, which is necesary in order to help the virtual enviorement to recognize the structure of the project, and also to avoid cache problems with tests.
+
+### Step 4: Install the dependencies
+
+With the project installed, it's necesary to install the project dependencies. For these purpose run the next command:
+
+    pip install -r requirements.txt
+    
+### Step 5: To keep in mind
+
+Whe new dependencies are added to the project, it's important to update the requirements file. These can be achieved throught the next command:
+
+    pip freeze -r > requirements.txt
+    
+For running test you can use the next command:
+
+    pytest
+    
+It will run all the test in the project.
 
 # Stage Front End 
 
