@@ -84,3 +84,13 @@ With the following script you can run the project in test normal mode:
 ```
 npm run test
 ```
+
+# Testing users
+
+To test the application you can use these users:
+
+username: prueba3
+password: 123456
+username: test_user
+password: password
+
