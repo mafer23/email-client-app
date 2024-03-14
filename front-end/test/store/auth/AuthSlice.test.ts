@@ -1,5 +1,5 @@
 import { authSlice, onChecking, onLogin, onLogout } from '../../../src/store/slices/auth/AuthSlice';
-import { demoUser, initialStateAuth, stateAuthenticated, stateNoAuthenticated, stateNoAuthenticatedWithError } from '../../fixtures/AuthFixtures';
+import { demoUser, initialStateAuth, stateAuthenticated, stateNoAuthenticated, stateNoAuthenticatedWithError } from '../../fixtures/authFixtures';
 
 describe('Test to [AuthSlice.ts]', () => {  
 
