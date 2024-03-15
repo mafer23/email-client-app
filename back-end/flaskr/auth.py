@@ -35,7 +35,6 @@ def register():
 
     # Return errors if any
     if len(error) != 0:
-        print("longitud de error",len(error))
         return jsonify({"status": "fail", "data": error}), 400
     else:
         try:

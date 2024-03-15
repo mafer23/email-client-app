@@ -37,7 +37,7 @@ def user_one(app):
     # hash the password manually for the test, this should be changed(I think)
     password = Password.create_hashed_password("testpassword")
     user = User(
-        userName="test_user_1", firstName="unit", lastName="testing", password= password
+        userName="test_user_1", firstName="unit", lastName="testing", password=password
     )
     try:
         db.session.add(user)
