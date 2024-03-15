@@ -10,7 +10,7 @@ from unittest.mock import patch
         (
             {"user_id": "1"},
             {
-                "userName": "userTest1",
+                "userName": "userTest1s",
                 "firstName": "unit",
                 "lastName": "testing",
                 "password": "123456",

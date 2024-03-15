@@ -15,7 +15,7 @@ bp = Blueprint("email", __name__, url_prefix="/email")
 
 
 # Endpoint to get emails sent and received for a specific user
-@bp.route("/user", methods=(["GET"]))
+@bp.route("/email/user", methods=(["GET"]))
 def get_user_emails():
     user_id = request.args.get("user_id")
     # Check if user_id is provided
