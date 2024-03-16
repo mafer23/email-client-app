@@ -27,7 +27,7 @@ def test_get_emails_user(
 
 @pytest.mark.parametrize(
     "expected",
-    [b'userId":1,"userName":"userTest","firstName":"unit","lastName":"testing'],
+   [ b' {"firstName":"unit","lastName ":" testing "," userId":1,"userName ":" userTest"} ' ],
 )
 def test_get_all_users(client, single_user, expected):
     response = client.get("/email/users")
