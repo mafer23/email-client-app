@@ -25,14 +25,13 @@ def test_get_emails_user(
     assert response.status_code == 200
 
 
-@pytest.mark.parametrize(
-    "expected",
-    [b'{"firstName":"unit","lastName":"testing","userId":1,"userName":"userTest"}'],
+@pytest .​ marca . parametrizar (
+    "esperado" ,
+    [ b' {"firstName":"unit","lastName ":" testing "," userId":1,"userName ":" userTest"} ' ],
 )
-def test_get_all_users(client, single_user, expected):
-    response = client.get("/email/users")
-    assert response.status_code == 200
-    assert expected in response.data
+def  test_get_all_users ( cliente , usuario_único , esperado ):
+    respuesta  =  cliente . obtener ( "/correo electrónico/usuarios" )
+	
 
 
 @pytest.mark.parametrize(
