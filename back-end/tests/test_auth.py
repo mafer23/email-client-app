@@ -21,6 +21,15 @@ import pytest
             },
             [b"Password is required", 400],
         ),
+         (
+            {
+                "username": "test_user_1",
+                "firstname": "test_firstname",
+                "lastname": "test_lastname",
+                "password": ""
+            },
+            [b"Password is required", 400],
+        ),
     ],
 )
 def test_register_user(client, register_user_input, expected):
